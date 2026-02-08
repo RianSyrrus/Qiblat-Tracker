@@ -1,0 +1,29 @@
+name: qiblat
+description: "Ini adalah aplikasi Qiblat Tracker RHI untuk mengetahui arah kiblat secara akurat menggunakan Flutter."
+publish_to: "none"
+version: 1.1.0
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  webview_flutter: ^4.0.7
+  geolocator: ^9.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/qt/
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/qt/icon.png"

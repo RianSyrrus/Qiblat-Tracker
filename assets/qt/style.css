@@ -1,0 +1,128 @@
+body {
+font-family: Verdana, Geneva, Arial, sans-serif; 
+background-color: transparent;
+font-size: 8pt;
+color : #4D4D4D;
+text-align : justify;
+}
+
+
+a {
+	text-decoration : none;
+	
+}
+a:link {
+	color : #0066FF;
+	text-decoration: normal;
+
+}
+a:visited {
+	color : #0099FF;
+}
+a:active {
+	color : #333333;
+	background-color : gray;
+}
+a:hover {
+	color : #FF9900;
+	background-color : none;
+	text-decoration:underline;
+}
+
+
+
+.btn1 {
+  background-color: transparent;
+  border:0px solid #808080;
+  color: #000080;
+  padding-left:4; 
+  padding-right:4; 
+  padding-top:1; 
+  padding-bottom:1; 
+  float:center; 
+  text-align:center;
+  font-size: 36px;
+  font-family: Verdana; 
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn1:hover {
+  background-color: none;
+   font-family: Verdana; 
+  color:#FFFF00 ;
+  font-size: 36px;
+}
+
+
+.btn2 {
+  background-color: transparent;
+  border:0px solid #808080;
+  color: #FFFFFF;
+  padding-left:4; 
+  padding-right:4; 
+  padding-top:10; 
+  padding-bottom:10; 
+  float:center; 
+  text-align:center;
+  font-size: 55px;
+  font-family: Verdana; 
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn2:hover {
+  background-color: none;
+  color: #FF0000;
+  font-size: 50px;
+  
+}
+
+
+
+.btn3 {
+  background-color: transparent;
+  border:0px solid #808080;
+  color: #000080;
+  padding-left:4; 
+  padding-right:4; 
+  padding-top:1; 
+  padding-bottom:1; 
+  float:center; 
+  text-align:center;
+  font-size: 36px;
+  font-family: Verdana; 
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn3:hover {
+  background-color: none;
+   font-family: Verdana; 
+  color:#FFFFFF ;
+  font-size: 40px;
+  
+}
+
+.btn4 {
+  background-color: transparent;
+  border:0px solid #808080;
+  color: #FFFFFF;
+  padding-left:4; 
+  padding-right:4; 
+  padding-top:1; 
+  padding-bottom:1; 
+  float:center; 
+  text-align:center;
+  font-size: 30px;
+  font-family: Verdana; 
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn4:hover {
+  background-color: none;
+   font-family: Verdana; 
+  color:#FF0000 ;
+  font-size: 30px;
+}

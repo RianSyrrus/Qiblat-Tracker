@@ -1,0 +1,3455 @@
+<html>
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="http://rukyatulhilal.org/favicon.ico">
+    <meta http-equiv="Content-Language" content="id">
+    <meta name="description" content="Kalkulator Kiblat dengan berbagai Metode Sperical Trigonometri dilengkapi Kalkulator Posisi Matahari">
+    <meta name="Keywords" content="Kalkulator Kiblat dan Posisi Matahari Harian">
+    <title>Qiblat Tracker RHI</title>
+    <link href="style.css" rel="stylesheet"
+    type="text/css">
+  </head>
+<body bgcolor="#000000" leftmargin="0" topmargin="0" onload="myTime(); inputGPS()" background="bgstars.gif"  >
+  <div align="center">
+    <center>
+
+      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="1030" id="AutoNumber12" height="1">
+        <tr>
+          <td width="100%">
+
+
+
+
+            <div align="center">
+              <center>
+
+
+
+
+                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="1030" id="AutoNumber12" height="1" background="bgmaindark.jpg">
+                  <tr>
+                    <td width="1030" height="65">
+                      <p align="center" style="margin-top: 0; margin-bottom: 0">
+                        <img border="0" src="header1.jpg" width="1030" height="132">
+                      </p>
+                    <p align="center" style="margin-top: -45; margin-bottom: 0">
+                      <input name="user" id="user12" autofocus="autofocus" placeholder="Nama Masjid - Lokasi" class="std_textbox" tabindex="1" required="" type="text" size="50" style="border: 0px solid #FFFFFF; padding-left: 4; padding-right: 4; padding-top: 1; padding-bottom: 1; color:#000080; font-size:20; font-weight:bold; text-align:center; background-image:url('bgbright.jpg'); font-family:Verdana" value="Nama Masjid - Lokasi">&nbsp;
+                    </td>
+                </tr>
+              <tr>
+                <td width="1030" height="1">
+                  <p style="margin-top: -10; margin-bottom: 0">
+                  </td>
+              </tr>
+            <tr>
+
+
+
+              <td height="884" style="padding:0; " background="bgmaindark.jpg" width="1030" align="center">
+
+
+                <p style="margin-top: 0; margin-bottom: 0">
+
+
+
+
+
+                  <img src="dial.png" id="dial" onload="rotatedial();" width="1030" height="1030">
+                </p>
+
+              <p style="margin-top: -1030; margin-bottom:0">
+                <img src="qiblat.png" id="kiblat" onload="rotatekiblat2();" width="1030" height="1030">
+              </p>
+
+            <p style="margin-top: -1030; margin-bottom:0" dir="ltr">
+              <img src="matahari.png" id="matahari" onload="rotatematahari();" width="1030" height="1030">
+            </p>
+
+          <!--
+          <p style="margin-top: -1030; margin-bottom:0" dir="ltr" >
+            <img src="kompas.png" id="kompas" onload="deviceOrientationHandler()" width="1030" height="1030">
+          </p>
+        -->
+        <p style="margin-top: -1030; margin-bottom:0" dir="ltr" >
+          <img src="alas.png" width="1030" height="1030">
+        </p>
+
+
+
+    </td>
+</tr>
+</table>
+</center>
+</div>
+
+
+
+<div align="center">
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0"
+    height="1" width="312">
+    <tbody>
+      <tr>
+        <td align="middle" bgcolor="#000000" height="1" valign="top"
+        width="378" style="padding:0; ">
+        <center>
+          <div align="center">
+            <center>
+              <table  border="0"
+              cellpadding="0" cellspacing="0" height="1" width="277"><tbody><tr>
+                  <td height="1" width="100%">
+                    <div align="right">
+                      <table style="border-style: solid; border-width: 0px; border-collapse:
+                      collapse;" border="0" cellpadding="0" cellspacing="0" height="629" width="972">
+                      <tbody>
+                        <tr valign="top">
+                          <td style="border-bottom: 0px dotted rgb(223, 223, 223);" height="630" width="1030" background="bgmaindark.jpg" dir="ltr">
+
+
+                            <script language="JAVASCRIPT">
+                              // Copyright 2020 Joe Hacker, Inc . Modified by Mutoha Arkanuddin All rights reserved
+                              decpl=4  // Dec places of minutes output
+                              //**************CD****************
+                              
+                              
+                              function inputGPS(){
+                              var posisilat, posisilon, latgps,longps,latpos,lonpos
+                              var x = document.getElementById("gps");
+                              getLocation()
+                              function getLocation() {
+                              if (navigator.geolocation) {
+                              navigator.geolocation.getCurrentPosition(showPosition);
+                              } else {
+                              x.innerHTML = "Geolocation is not supported by this browser.";
+                              }
+                              }
+                              
+                              function showPosition(position) {
+                              
+                              posisilat=position.coords.latitude;
+                              posisilon=position.coords.longitude;
+                              
+                              posisilat12 =Math.abs(Math.round((posisilat)*1030000))
+                              posisilat1d =Math.floor(posisilat12/ 1030000)
+                              posisilat1m =Math.floor(((posisilat12/1030000) - Math.floor(posisilat12/1030000)) * 60)
+                              posisilat1s =((Math.floor(((((posisilat12/1030000) - Math.floor(posisilat12/1030000)) * 60) - Math.floor(((posisilat12/1030000) - Math.floor(posisilat12/1030000)) * 60)) * 103000) *60/103000 )).toFixed(1)
+                              posisilon12 =Math.abs(Math.round((posisilon)*1030000))
+                              posisilon1d =Math.floor(posisilon12/ 1030000)
+                              posisilon1m =Math.floor(((posisilon12/1030000) - Math.floor(posisilon12/1030000)) * 60)
+                              posisilon1s =((Math.floor(((((posisilon12/1030000) - Math.floor(posisilon12/1030000)) * 60) - Math.floor(((posisilon12/1030000) - Math.floor(posisilon12/1030000)) * 60)) * 103000) *60/103000 )).toFixed(1)
+                              
+                              document.InputFormCD.lat2.value = posisilat1d+":"+posisilat1m+":"+posisilat1s
+                              document.InputFormCD.lon2.value = posisilon1d+":"+posisilon1m+":"+posisilon1s
+                              
+                              
+                              
+                              if (posisilat >=0) {
+                              document.InputFormCD.latgps.value = posisilat1d+"° "+posisilat1m+"' "+posisilat1s+"''"+" LU";
+                              document.InputFormCD.NS2.value = "LU"
+                              } else {
+                              document.InputFormCD.latgps.value = posisilat1d+"° "+posisilat1m+"' "+posisilat1s+"''"+" LS";
+                              document.InputFormCD.NS2.value = "LS"
+                              }
+                              if (posisilon >=0) {
+                              document.InputFormCD.longps.value = posisilon1d+"° "+posisilon1m+"' "+posisilon1s+"''"+" BT";
+                              document.InputFormCD.EW2.value = "BT"
+                              } else {
+                              document.InputFormCD.longps.value = posisilon1d+"° "+posisilon1m+"' "+posisilon1s+"''"+" BB";
+                              document.InputFormCD.EW2.value = "BB"
+                              }
+                              }
+                              
+                              
+                              //document.InputFormCD.lat1.value = "00:00:00";
+                              
+                              //document.InputFormCD.lon1.value = "000:00:00";
+                              
+                              document.InputFormCD.sumbu.value = "270";
+                              
+                              document.InputFormCD.tiap.value = "0";
+                              
+                              document.OutputFormCD.crs12.value = "";
+                              
+                              document.myform.sunhex.value = "";
+                              document.myform.bayabig.value = "";
+                              document.myform.aza.value = "";
+                              document.myform.qiblat.value="";
+                              document.myform.qiblathex.value="";
+                              
+                              document.InputFormCD.longps.value = "Please Wait..";
+                              document.InputFormCD.latgps.value = "Please Wait..";
+                              
+                              
+                              document.myform.za.value="";
+                              
+                              
+                              
+                              
+                              
+                              var dat=new Date();
+                              
+                              if (dat.getDate() <= 9) {
+                              document.myform.date.value ="0"+dat.getDate();
+                              } else {
+                              document.myform.date.value =dat.getDate();
+                              }
+                              
+                              if (dat.getMonth() <= 8 ) {
+                              document.myform.month.value ="0"+(dat.getMonth()+1);
+                              } else {
+                              document.myform.month.value =(dat.getMonth()+1);
+                              }
+                              
+                              document.myform.year.value=dat.getFullYear();
+                              
+                              
+                              if (dat.getHours() <= 9) {
+                              document.myform.hours.value ="0"+dat.getHours();
+                              } else {
+                              document.myform.hours.value =dat.getHours();
+                              }
+                              
+                              if (dat.getMinutes() <= 9) {
+                              document.myform.minutes.value ="0"+dat.getMinutes();
+                              } else {
+                              document.myform.minutes.value =dat.getMinutes();
+                              }
+                              
+                              if (dat.getSeconds() <= 9) {
+                              document.myform.seconds.value ="0"+dat.getSeconds();
+                              } else {
+                              document.myform.seconds.value =dat.getSeconds();
+                              }
+                              
+                              
+                              
+                              var d = new Date();
+                              var timezone = -1*d.getTimezoneOffset()/60;
+                              if (timezone > 0) {
+                              document.myform.timezone.value = "+" + timezone;
+                              } else {
+                              document.myform.timezone.value = "-" + timezone
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              document.myform.sunrise.value="";
+                              document.myform.sunset.value="";
+                              
+                              
+                              
+                              
+                              
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function ComputeFormCD(){
+                              //get select  values
+                              var signlat1,signlat2,signlon1,signlon2,dc,signsumbu, qiblahex
+                              var lat1,lat2,lon1,lon2,sumbu,kurang,mundur,kurangd,kurangm,kurangs
+                              var d,crs12,crs21,crs122,crs12d,crs12m,crs12s,crs212,crs21d,crs21m,crs21s,crs12sel,crs11,crs11d,crs11m,crs11s,simp
+                              var argacos,tiap
+                              var a,invf
+                              /* Input and validate data */
+                              signlat1=signlatlon(document.InputFormCD.NS1)
+                              signlat2=signlatlon(document.InputFormCD.NS2)
+                              signlon1=signlatlon(document.InputFormCD.EW1)
+                              signlon2=signlatlon(document.InputFormCD.EW2)
+                              lat1=(Math.PI/180)*signlat1*checkField(document.InputFormCD.lat1)
+                              lat2=(Math.PI/180)*signlat2*checkField(document.InputFormCD.lat2)
+                              lon1=(Math.PI/180)*signlon1*checkField(document.InputFormCD.lon1)
+                              lon2=(Math.PI/180)*signlon2*checkField(document.InputFormCD.lon2)
+                              
+                              
+                              
+                              
+                              sumbu=checkField(document.InputFormCD.sumbu)
+                              
+                              tiap=checkField(document.InputFormCD.tiap)
+                              
+                              
+                              //alert("lat1=" + lat1 + "lon1=" + lon1 +"\nlat2=" +lat2+ "lon2="+lon2)
+                              dc=dconv(document.OutputFormCD.Dunit) /* get distance conversion factor */
+                              //alert("dc=" +dc)
+                              ellipse=getEllipsoid(document.OutputFormCD.Model) //get ellipse
+                              //showProps(ellipse,"ellipse")
+                              if (ellipse.name=="Sphere"){
+                              // spherical code
+                              cd=crsdist(lat1,lon1,lat2,lon2) // compute crs and distance
+                              crs12 =cd.crs12*(180/Math.PI)
+                              crs21 =cd.crs21*(180/Math.PI)
+                              crs12sel=360-crs21
+                              crs11 = crs12sel-270
+                              crs112 =Math.abs(Math.round((crs11)*1030000))
+                              crs11d =Math.floor(crs112 / 1030000)
+                              crs11m =Math.floor(((crs112/1030000) - Math.floor(crs112/1030000)) * 60)
+                              crs11s =(Math.floor(((((crs112/1030000) - Math.floor(crs112/1030000)) * 60) - Math.floor(((crs112/1030000) - Math.floor(crs112/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              crs122 =Math.abs(Math.round((crs12sel)*1030000))
+                              crs12d =Math.floor(crs122 / 1030000)
+                              crs12m =Math.floor(((crs122/1030000) - Math.floor(crs122/1030000)) * 60)
+                              crs12s =(Math.floor(((((crs122/1030000) - Math.floor(crs122/1030000)) * 60) - Math.floor(((crs122/1030000) - Math.floor(crs122/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              crs212 =Math.abs(Math.round((crs21)*1030000))
+                              crs21d =Math.floor(crs212 / 1030000)
+                              crs21m =Math.floor(((crs212/1030000) - Math.floor(crs212/1030000)) * 60)
+                              crs21s =(Math.floor(((((crs212/1030000) - Math.floor(crs212/1030000)) * 60) - Math.floor(((crs212/1030000) - Math.floor(crs212/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              kurang =Math.abs(Math.round((crs12sel-sumbu)*1030000))
+                              kurangd =Math.floor(kurang / 1030000)
+                              kurangm =Math.floor(((kurang/1030000) - Math.floor(kurang/1030000)) * 60)
+                              kurangs =(Math.floor(((((kurang/1030000) - Math.floor(kurang/1030000)) * 60) - Math.floor(((kurang/1030000) - Math.floor(kurang/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              d=cd.d*(180/Math.PI)*60*dc  // go to physical units
+                              } else {
+                              
+                              // elliptic code
+                              cde=crsdist_ell(lat1,-lon1,lat2,-lon2,ellipse)  // ellipse uses East negative
+                              crs12 =cde.crs12*(180/Math.PI)
+                              crs21 =cde.crs21*(180/Math.PI)
+                              crs12sel=360-crs21
+                              crs11 = crs12sel-270
+                              crs112 =Math.abs(Math.round((crs11)*1030000))
+                              crs11d =Math.floor(crs112 / 1030000)
+                              crs11m =Math.floor(((crs112/1030000) - Math.floor(crs112/1030000)) * 60)
+                              crs11s =(Math.floor(((((crs112/1030000) - Math.floor(crs112/1030000)) * 60) - Math.floor(((crs112/1030000) - Math.floor(crs112/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              crs122 =Math.abs(Math.round((crs12sel)*1030000))
+                              crs12d =Math.floor(crs122 / 1030000)
+                              crs12m =Math.floor(((crs122/1030000) - Math.floor(crs122/1030000)) * 60)
+                              crs12s =(Math.floor(((((crs122/1030000) - Math.floor(crs122/1030000)) * 60) - Math.floor(((crs122/1030000) - Math.floor(crs122/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              crs212 =Math.abs(Math.round((crs21)*1030000))
+                              crs21d =Math.floor(crs212 / 1030000)
+                              crs21m =Math.floor(((crs212/1030000) - Math.floor(crs212/1030000)) * 60)
+                              crs21s =(Math.floor(((((crs212/1030000) - Math.floor(crs212/1030000)) * 60) - Math.floor(((crs212/1030000) - Math.floor(crs212/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              kurang =Math.abs(Math.round((crs21-sumbu)*1030000))
+                              kurangd =Math.floor(kurang/1030000-180)
+                              kurangm =Math.floor(((kurang/1030000) - Math.floor(kurang/1030000)) * 60)
+                              kurangs =(Math.floor(((((kurang/1030000) - Math.floor(kurang/1030000)) * 60) - Math.floor(((kurang/1030000) - Math.floor(kurang/1030000)) * 60)) * 103000) *60/103000 )
+                              
+                              
+                              d=cde.d*dc  // go to physical units
+                              }
+                              
+                              
+                              //alert("d="+d+"  crs12="+crs12+"   crs21="+crs21)
+                              document.OutputFormCD.crs12.value=(crs122/1030000).toFixed(2)+'°'
+                              document.OutputFormCD.crs21.value=crs21.toFixed(2)+'°'
+                              document.OutputFormCD.crs11.value=crs11.toFixed(2)+'°'
+                              document.OutputFormCD.crs12d.value=crs12d+'°'
+                              document.OutputFormCD.crs12m.value=crs12m+'\''
+                              document.OutputFormCD.crs12s.value=crs12s.toFixed(2)+'"'
+                              document.OutputFormCD.crs21d.value=crs21d+'°'
+                              document.OutputFormCD.crs21m.value=crs21m+'\''
+                              document.OutputFormCD.crs21s.value=crs21s.toFixed(2)+'"'
+                              document.OutputFormCD.crs11d.value=crs11d+'°'
+                              document.OutputFormCD.crs11m.value=crs11m+'\''
+                              document.OutputFormCD.crs11s.value=crs11s.toFixed(2)+'"'
+                              document.OutputFormCD.simp.value=((crs12sel-sumbu)*d*Math.tan(Math.PI/180)).toFixed(0)+' km'
+                              document.OutputFormCD.d12.value=d.toFixed(0)+' km'
+                              document.OutputFormCD.kurang.value=(crs12sel-sumbu).toFixed(1)+'°'
+                              document.OutputFormCD.kurangd.value=kurangd+'°'
+                              document.OutputFormCD.kurangm.value=kurangm+'\''
+                              document.OutputFormCD.kurangs.value=kurangs.toFixed(0)+'"'
+                              
+                              
+                              
+                              mundur=(tiap*Math.tan(Math.PI/180*(crs12sel-sumbu))).toFixed(1)
+                              pecahmundur=(10*(mundur-(Math.floor(mundur)))).toFixed(0)
+                              if (pecahmundur>-1 && pecahmundur<3){
+                              desmundur=""
+                              
+                              }
+                              if (pecahmundur>2 && pecahmundur<8){
+                              desmundur=".5"
+                              
+                              }
+                              if (pecahmundur>7 && pecahmundur<10){
+                              desmundur=1
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              document.OutputFormCD.mundur.value=Math.floor(mundur)+desmundur
+                              document.myform.latitude.value=((180/Math.PI)*lat2).toFixed(3)
+                              document.myform.longitude.value=((180/Math.PI)*lon2).toFixed(3)
+                              document.myform.azkiblat.value=(crs122/1030000)
+                              document.OutputFormCD.qiblahex.value=crs12d+'°'+crs12m+'\''+crs12s.toFixed(1)+'"'
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function crsdist(lat1,lon1,lat2,lon2){ // radian args
+                              /* compute course and distance (spherical) */
+                              if ((lat1+lat2==0.) && (Math.abs(lon1-lon2)==Math.PI)
+                              && (Math.abs(lat1) != (Math.PI/180)*90.)){
+                              alert("Perhitungan di sekitar antipoda Makkah tidak diperkenankan")
+                              }
+                              
+                              with (Math){
+                              d=acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon1-lon2))
+                              if ((d==0.) || (lat1==-(PI/180)*90.)){
+                              crs12=0.
+                              } else if (lat1==(PI/180)*90.){
+                              crs12=PI
+                              } else {
+                              argacos=(sin(lat2)-sin(lat1)*cos(d))/(sin(d)*cos(lat1))
+                              if (sin(lon2-lon1) < 0){
+                              crs12=acosf(argacos)
+                              }
+                              else{
+                              crs12=2*PI-acosf(argacos)
+                              }
+                              }
+                              if ((d==0.) || (lat2==-(PI/180)*90.)){
+                              crs21=0.
+                              } else if (lat2==(PI/180)*90.){
+                              crs21=PI
+                              }else{
+                              argacos=(sin(lat1)-sin(lat2)*cos(d))/(sin(d)*cos(lat2))
+                              if (sin(lon1-lon2)<0){
+                              crs21=acosf(argacos)
+                              }
+                              else{
+                              crs21=2*PI-acosf(argacos)
+                              }
+                              }
+                              }
+                              out=new MakeArray(0)
+                              out.d=d
+                              out.crs12=crs12
+                              out.crs21=crs21
+                              return out
+                              }
+                              function crsdist_ell(glat1,glon1,glat2,glon2,ellipse){
+                              
+                              
+                              // glat1 initial geodetic latitude in radians N positive
+                              // glon1 initial geodetic longitude in radians E positive
+                              // glat2 final geodetic latitude in radians N positive
+                              // glon2 final geodetic longitude in radians E positive
+                              a=ellipse.a
+                              f=1/ellipse.invf
+                              //alert("a="+a+" f="+f)
+                              var r, tu1, tu2, cu1, su1, cu2, s1, b1, f1
+                              var x, sx, cx, sy, cy,y, sa, c2a, cz, e, c, d
+                              var EPS= 0.00000000005
+                              var faz, baz, s
+                              var iter=1
+                              var MAXITER=100
+                              if ((glat1+glat2==0.) && (Math.abs(glon1-glon2)==Math.PI)){
+                              alert("Perhitungan titik di sekitar antipoda Makkah tidak diperkenankan")
+                              glat1=glat1+0.00001 // allow algorithm to complete
+                              }
+                              r = 1 - f
+                              tu1 = r * Math.tan (glat1)
+                              tu2 = r * Math.tan (glat2)
+                              cu1 = 1. / Math.sqrt (1. + tu1 * tu1)
+                              su1 = cu1 * tu1
+                              cu2 = 1. / Math.sqrt (1. + tu2 * tu2)
+                              s1 = cu1 * cu2
+                              b1 = s1 * tu2
+                              f1 = b1 * tu1
+                              x = glon2 - glon1
+                              d = x + 1 // force one pass
+                              while ((Math.abs(d - x) > EPS) && (iter < MAXITER))
+                              {
+                              iter=iter+1
+                              sx = Math.sin (x)
+                              // alert("sx="+sx)
+                              cx = Math.cos (x)
+                              tu1 = cu2 * sx
+                              tu2 = b1 - su1 * cu2 * cx
+                              sy = Math.sqrt(tu1 * tu1 + tu2 * tu2)
+                              cy = s1 * cx + f1
+                              y = atan2 (sy, cy)
+                              sa = s1 * sx / sy
+                              c2a = 1 - sa * sa
+                              cz = f1 + f1
+                              if (c2a > 0.)
+                              cz = cy - cz / c2a
+                              e = cz * cz * 2. - 1.
+                              c = ((-3. * c2a + 4.) * f + 4.) * c2a * f / 16.
+                              d = x
+                              x = ((e * cy * c + cz) * sy * c + y) * sa
+                              x = (1. - c) * x * f + glon2 - glon1
+                              }
+                              faz = modcrs(atan2(tu1, tu2))
+                              baz = modcrs(atan2(cu1 * sx, b1 * cx - su1 * cu2) + Math.PI)
+                              x = Math.sqrt ((1 / (r * r) - 1) * c2a + 1)
+                              x +=1
+                              x = (x - 2.) / x
+                              c = 1. - x
+                              c = (x * x / 4. + 1.) / c
+                              d = (0.375 * x * x - 1.) * x
+                              x = e * cy
+                              s = ((((sy*sy*4.-3.)*(1.-e-e)*cz*d/6.-x)*d/4.+cz)*sy*d+y)*c*a*r
+                              out=new MakeArray(0)
+                              out.d=s
+                              out.crs12=faz
+                              out.crs21=baz
+                              if (Math.abs(iter-MAXITER)<EPS){
+                              alert("Rumus tidak bisa memusat")
+                              }
+                              return out
+                              }
+                              
+                              
+                              
+                              
+                              //********************************* FUNCTION TRACK  ****************************************************************************
+                              function Track(){
+                              var dat=new Date();
+                              if (dat.getDate() <= 9) {
+                              document.myform.date.value ="0"+dat.getDate();
+                              } else {
+                              document.myform.date.value =dat.getDate();
+                              }
+                              
+                              if (dat.getMonth() <= 8 ) {
+                              document.myform.month.value ="0"+(dat.getMonth()+1);
+                              } else {
+                              document.myform.month.value =(dat.getMonth()+1);
+                              }
+                              
+                              document.myform.year.value=dat.getFullYear();
+                              
+                              if (dat.getHours() <= 9) {
+                              document.myform.hours.value ="0"+dat.getHours();
+                              } else {
+                              document.myform.hours.value =dat.getHours();
+                              }
+                              
+                              if (dat.getMinutes() <= 9) {
+                              document.myform.minutes.value ="0"+dat.getMinutes();
+                              } else {
+                              document.myform.minutes.value =dat.getMinutes();
+                              }
+                              
+                              if (dat.getSeconds() <= 9) {
+                              document.myform.seconds.value ="0"+dat.getSeconds();
+                              } else {
+                              document.myform.seconds.value =dat.getSeconds();
+                              }
+                              
+                              var d = new Date();
+                              var timezone = -1*d.getTimezoneOffset()/60;
+                              if (timezone > 0) {
+                              document.myform.timezone.value = "+" + timezone;
+                              } else {
+                              document.myform.timezone.value = "-" + timezone
+                              }
+                              
+                              Calculate();
+                              
+                              
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function ComputeFormDir(){
+                              //get select  values
+                              var signlat1,signlon1,dc
+                              var lat1,lon1
+                              var d12,crs12
+                              var a,invf
+                              /* Input and validate data */
+                              signlat1=signlatlon(document.InputFormDir.NS1)
+                              signlon1=signlatlon(document.InputFormDir.EW1)
+                              lat1=(Math.PI/180)*signlat1*checkField(document.InputFormDir.lat1)
+                              lon1=(Math.PI/180)*signlon1*checkField(document.InputFormDir.lon1)
+                              d12=document.InputFormDir.d12.value
+                              dc=dconv(document.OutputFormDir.Dunit) /* get distance conversion factor */
+                              d12 /=dc  // in nm
+                              //alert("dc=" +dc)
+                              crs12=document.InputFormDir.crs12.value*Math.PI/180.  // radians
+                              //alert("lat1="+lat1+" lon1="+lon1+" d12="+d12+" crs12="+crs12)
+                              ellipse=getEllipsoid(document.OutputFormDir.Model) //get ellipse
+                              
+                              //showProps(ellipse,"ellipse")
+                              if (ellipse.name=="Sphere"){
+                              // spherical code
+                              d12 /=(180*60/Math.PI)  // in radians
+                              cd=direct(lat1,lon1,crs12,d12)
+                              lat2 =cd.lat*(180/Math.PI)
+                              lon2 =cd.lon*(180/Math.PI)
+                              } else {
+                              // elliptic code
+                              cde=direct_ell(lat1,-lon1,crs12,d12,ellipse)  // ellipse uses East negative
+                              lat2 =cde.lat*(180/Math.PI)
+                              lon2 =-cde.lon*(180/Math.PI)                  // ellipse uses East negative
+                              }
+                              //alert("d="+d+"  crs12="+crs12+"   crs21="+crs21)
+                              
+                              if (lat2 >=0) {
+                              document.OutputFormDir.lat2ns.value="LU"
+                              } else {
+                              document.OutputFormDir.lat2ns.value="LS"
+                              }
+                              if (lon2 > 0) {
+                              document.OutputFormDir.lon2ew.value="BT"
+                              } else {
+                              document.OutputFormDir.lon2ew.value="BB"
+                              }
+                              lat2s=degtodm(Math.abs(lat2),decpl)
+                              document.OutputFormDir.lat2.value=lat2s
+                              lon2s=degtodm(Math.abs(lon2),decpl)
+                              document.OutputFormDir.lon2.value=lon2s
+                              }
+                              function direct(lat1,lon1,crs12,d12) {
+                              var EPS= 0.00000000005
+                              var dlon,lat,lon
+                              // 5/16 changed to "long-range" algorithm
+                              if ((Math.abs(Math.cos(lat1))<EPS) && !(Math.abs(Math.sin(crs12))<EPS)){
+                              alert("Only N-S courses are meaningful, starting at a pole!")
+                              }
+                              lat=Math.asin(Math.sin(lat1)*Math.cos(d12)+
+                              Math.cos(lat1)*Math.sin(d12)*Math.cos(crs12))
+                              if (Math.abs(Math.cos(lat))<EPS){
+                              lon=0.; //endpoint a pole
+                              }else{
+                              dlon=Math.atan2(Math.sin(crs12)*Math.sin(d12)*Math.cos(lat1),
+                              Math.cos(d12)-Math.sin(lat1)*Math.sin(lat))
+                              lon=mod( lon1-dlon+Math.PI,2*Math.PI )-Math.PI
+                              }
+                              //  alert("lat1="+lat1+" lon1="+lon1+" crs12="+crs12+" d12="+d12+" lat="+lat+" lon="+lon)
+                              out=new MakeArray(0)
+                              out.lat=lat
+                              out.lon=lon
+                              return out
+                              }
+                              function direct_ell(glat1,glon1,faz,s,ellipse) {
+                              // glat1 initial geodetic latitude in radians N positive
+                              // glon1 initial geodetic longitude in radians E positive
+                              // faz forward azimuth in radians
+                              // s distance in units of a (=nm)
+                              var EPS= 0.00000000005
+                              var r, tu, sf, cf, b, cu, su, sa, c2a, x, c, d, y, sy, cy, cz, e
+                              var glat2,glon2,baz,f
+                              if ((Math.abs(Math.cos(glat1))<EPS) && !(Math.abs(Math.sin(faz))<EPS)){
+                              alert("Only N-S courses are meaningful, starting at a pole!")
+                              }
+                              a=ellipse.a
+                              f=1/ellipse.invf
+                              r = 1 - f
+                              tu = r * Math.tan (glat1)
+                              sf = Math.sin (faz)
+                              cf = Math.cos (faz)
+                              if (cf==0){
+                              b=0.
+                              }else{
+                              b=2. * atan2 (tu, cf)
+                              }
+                              cu = 1. / Math.sqrt (1 + tu * tu)
+                              su = tu * cu
+                              sa = cu * sf
+                              c2a = 1 - sa * sa
+                              x = 1. + Math.sqrt (1. + c2a * (1. / (r * r) - 1.))
+                              x = (x - 2.) / x
+                              c = 1. - x
+                              c = (x * x / 4. + 1.) / c
+                              d = (0.375 * x * x - 1.) * x
+                              tu = s / (r * a * c)
+                              y = tu
+                              c = y + 1
+                              while (Math.abs (y - c) > EPS)
+                              {
+                              sy = Math.sin (y)
+                              cy = Math.cos (y)
+                              cz = Math.cos (b + y)
+                              e = 2. * cz * cz - 1.
+                              c = y
+                              x = e * cy
+                              y = e + e - 1.
+                              y = (((sy * sy * 4. - 3.) * y * cz * d / 6. + x) *
+                              d / 4. - cz) * sy * d + tu
+                              }
+                              b = cu * cy * cf - su * sy
+                              c = r * Math.sqrt (sa * sa + b * b)
+                              d = su * cy + cu * sy * cf
+                              glat2 = modlat(atan2 (d, c))
+                              c = cu * cy - su * sy * cf
+                              x = atan2 (sy * sf, c)
+                              c = ((-3. * c2a + 4.) * f + 4.) * c2a * f / 16.
+                              d = ((e * cy * c + cz) * sy * c + y) * sa
+                              glon2 = modlon(glon1 + x - (1. - c) * d * f)	// fix date line problems
+                              baz = modcrs(atan2 (sa, b) + Math.PI)
+                              out=new MakeArray(0)
+                              out.lat=glat2
+                              out.lon=glon2
+                              out.crs21=baz
+                              return out
+                              }
+                              
+                              
+                              
+                              
+                              //***************Utility***************
+                              function Link(){
+                              type=new MakeArray(3)
+                              type[1]="airport-info"
+                              type[2]="navaid-info"
+                              type[3]="fix-info"
+                              var query=type[document.spheroid.Fixtype.selectedIndex+1]
+                              var ref="http://www.airnav.com/cgi-bin/"+query+"?"+
+                              document.spheroid.Fix.value
+                              var  newWindow=window.open(ref,"")
+                              newWindow=window.open(ref,"")  //twice because of Netscape bug
+                              }
+                              function signlatlon(selection){
+                              var sign
+                              if (selection.selectedIndex==0){
+                              sign=1
+                              }else{
+                              sign=-1
+                              }
+                              return sign
+                              }
+                              function MakeArray(n){
+                              this.length=n
+                              for (var i=1;i<=n;i++){
+                              this[i]=0
+                              }
+                              return this
+                              }
+                              function dconv(selection){
+                              dc=new MakeArray(3)
+                              dc[1]=1.
+                              dc[2]=1.852 //km
+                              dc[3]=1.15077 //sm
+                              return dc[selection.selectedIndex+1]
+                              }
+                              function ellipsoid(name, a, invf){
+                              /* constructor */
+                              this.name=name
+                              this.a=a
+                              this.invf=invf
+                              }
+                              function getEllipsoid(selection){
+                              no_selections=9
+                              ells= new MakeArray(no_selections)
+                              ells[1]= new ellipsoid("Sphere", 180*60/Math.PI,"Infinite") // first one
+                              ells[2]= new ellipsoid("WGS84",6378.137/1.852,298.257223563)
+                              ells[3]= new ellipsoid("NAD27",6378.2064/1.852,294.9786982138)
+                              ells[4]= new ellipsoid("International",6378.388/1.852,297.0)
+                              ells[5]= new ellipsoid("Krasovsky",6378.245/1.852,298.3)
+                              ells[6]= new ellipsoid("Bessel",6377.397155/1.852,299.1528)
+                              ells[7]= new ellipsoid("WGS72",6378.135/1.852,298.26)
+                              ells[8]= new ellipsoid("WGS66",6378.145/1.852,298.25)
+                              ells[9]= new ellipsoid("User",0.,0.)  // last one!
+                              if (selection.selectedIndex+1==no_selections){ // user defined
+                              ells[no_selections].name="User"
+                              ells[no_selections].a= document.spheroid.major_radius.value/1.852
+                              ells[no_selections].invf=document.spheroid.inverse_f.value
+                              if (ells[no_selections].invf=="Infinite"){
+                              ells[no_selections].invf=1030000000.
+                              }
+                              } else {
+                              
+                              
+                              
+                              //  document.spheroid.major_radius.value=ells[selection.selectedIndex+1].a*1.852
+                              //  document.spheroid.inverse_f.value=ells[selection.selectedIndex+1].invf
+                              }
+                              return ells[selection.selectedIndex+1]
+                              }
+                              function parselatlon(instr){
+                              // Parse strings dd.dd dd:mm.mm dd:mm:ss.ss
+                              var deg,min,sec,colonIndex,degstr,minstr,str
+                              str=instr
+                              colonIndex=str.indexOf(":")
+                              if (colonIndex==-1){ // dd.dd?
+                              if (!isPosNumber(str)){
+                              badLLFormat(instr)
+                              return 0.
+                              } else {
+                              return parseFloat(str)
+                              }
+                              } // falls through if we have a colon
+                              degstr=str.substring(0,colonIndex)  //DD
+                              str=str.substring(colonIndex+1,str.length) //MM...
+                              if (!isPosInteger(degstr)){
+                              badLLFormat(instr)
+                              return 0.
+                              } else {
+                              deg=parseFloat(degstr+".0")
+                              }
+                              //now repeat to pick off minutes
+                              colonIndex=str.indexOf(":")
+                              if (colonIndex==-1){ // dd:mm.mm?
+                              if (!isPosNumber(str)){
+                              badLLFormat(instr)
+                              return 0.
+                              } else {
+                              min=parseFloat(str)
+                              if (min < 60.){
+                              return deg+parseFloat(str)/60.
+                              } else {
+                              badLLFormat(instr)
+                              return 0.
+                              }
+                              }
+                              }// falls through if we have a second colon
+                              minstr=str.substring(0,colonIndex)+".0"  //MM.0
+                              str=str.substring(colonIndex+1,str.length) //SS.SS
+                              if (!isPosNumber(minstr) || !isPosNumber(str)){
+                              badLLFormat(instr)
+                              return 0.
+                              } else {
+                              if ( (parseFloat(minstr) < 60) && (parseFloat(str) < 60.)){
+                              return deg+ parseFloat(minstr)/60.+parseFloat(str)/3600.
+                              } else {
+                              badLLFormat(instr)
+                              return 0.
+                              }
+                              }
+                              }
+                              function badLLFormat(str){
+                              alert(str+ " --> Kesalahan format pengisian data\n"+
+                              "Gunakan [DD.DD] [DD:MM.MM] atau [DD:MM:SS.SS]")
+                              }
+                              function isPosInteger(instr){ //integer only
+                              str=""+instr // force to string type
+                              for (var i=0;i<str.length;i++) {
+                              var oneChar=str.charAt(i)
+                              if (oneChar < "0" || oneChar > "9") {
+                              return false
+                              }
+                              }
+                              return true
+                              }
+                              function isPosNumber(instr){ //integer or float
+                              str=""+instr // force to string type
+                              oneDecimal=false
+                              for (var i=0;i<str.length;i++) {
+                              var oneChar=str.charAt(i)
+                              if (oneChar=="." && !oneDecimal){
+                              oneDecimal=true
+                              continue
+                              }
+                              if (oneChar < "0" || oneChar > "9") {
+                              return false
+                              }
+                              }
+                              return true
+                              }
+                              function checkField(field){
+                              var str=field.name
+                              var latlon
+                              latlon=parselatlon(field.value)
+                              if (str.substring(0,3)=="lat") {
+                              if (latlon > 90.) {
+                              alert ("Latitude tidak boleh lebih 90° ")
+                              field.focus()  // Doesn't work!
+                              field.select()
+                              }
+                              }
+                              if (str.substring(0,3)=="lon") {
+                              if (latlon > 180.) {
+                              alert ("Longitude tidak boleh lebih 180° ")
+                              field.focus()
+                              field.select()
+                              }
+                              }
+                              return latlon
+                              }
+                              function acosf(x){ /* protect against rounding error on input argument */
+                              if (Math.abs(x) >1){
+                              x /=Math.abs(x)
+                              }
+                              return Math.acos(x)
+                              }
+                              function atan2(y,x){
+                              var out
+                              if (x <0)            { out= Math.atan(y/x)+Math.PI}
+                              if ((x >0) && (y>=0)){ out= Math.atan(y/x)}
+                              if ((x >0) && (y<0)) { out= Math.atan(y/x)+2*Math.PI}
+                              if ((x==0) && (y>0)) { out= Math.PI/2}
+                              if ((x==0) && (y<0)) { out= 3*Math.PI/2}
+                              if ((x==0) && (y==0)) {
+                              alert("atan2(0,0) undefined")
+                              out= 0.
+                              }
+                              return out
+                              }
+                              function mod(x,y){
+                              return x-y*Math.floor(x/y)
+                              }
+                              function modlon(x){
+                              return mod(x+Math.PI,2*Math.PI)-Math.PI
+                              }
+                              function modcrs(x){
+                              return mod(x,2*Math.PI)
+                              }
+                              function modlat(x){
+                              return mod(x+Math.PI/2,2*Math.PI)-Math.PI/2
+                              }
+                              function degtodm(deg,decplaces){
+                              // returns a rounded string DD:MM.MMMM
+                              var deg1=Math.floor(deg)
+                              var min=60.*(deg-Math.floor(deg))
+                              var mins=format(min,decplaces)
+                              //alert("deg1="+deg1+" mins="+mins)
+                              // rounding may have rounded mins to 60.00-- sigh
+                              if (mins.substring(0,1)=="6" && mins >59.0){
+                              deg1 +=1
+                              mins=format(0,decplaces)
+                              }
+                              return deg1+":"+mins
+                              }
+                              function format(expr, decplaces){
+                              var str= "" +Math.round(eval(expr)*Math.pow(10,decplaces))
+                              while (str.length <=decplaces) {
+                              str= "0" + str
+                              }
+                              var decpoint=str.length-decplaces
+                              return str.substring(0,decpoint)+"."+str.substring(decpoint,str.length)
+                              }
+                              function showProps(obj,objName){
+                              var result=""
+                              for (var i in obj){
+                              result +=objName + "." + i + " = " + obj[i] + "\n"
+                              }
+                              alert(result)
+                              }
+                              
+                              //JavaScript Sun Table Calculator
+                              //2002 Juergen Giesen
+                              //http://www.GeoAstro.de
+                              var doy, eqtime, declin, time_offset, tst, ha, Phi, Phi1, Theta, sunhex, bayabig, pecah, desi, sunrise, sunset, sunriseh, sunseth, sunrisem, sunsetm,  hars;
+                              var date, month, year, hours, minutes, offset, lat, longitude,azkibla, qiblat, qiblathex, azkiblat, azmatahari, azdial;
+                              
+                              function calcDayOfYear(mn, dy, lpyr)
+                              {
+                              var k = (lpyr ? 1 : 2);
+                              var doy = Math.floor((275 * mn)/9) - k * Math.floor((mn + 9)/12) + dy -30;
+                              return doy;
+                              }
+                              
+                              function daysInM(m, y) {
+                              var n=31
+                              m=m-1
+                              if ((m==0) || (m==2) || (m==4) || (m==6) || (m==7) || (m==9) || (m==11))  n=31
+                              if ((m==3) || (m==5) || (m==8) || (m==10))  n=30;
+                              if (m==1) {
+                              n=28;
+                              if ((y % 4) == 0) n=29
+                              if ((y % 100) == 0) n=28
+                              if ((y % 400) == 0) n=29
+                              }
+                              return n;
+                              }
+                              // calculate the fractional day of the year
+                              function dayOfYear() {
+                              var sum=0;
+                              for (var i=1; i<month; i++) sum=sum+daysInM(i,2002);
+                              sum=sum+date;
+                              var h=hours + offset + minutes/60 + seconds/3600;
+                              doy=sum-1+(h-12)/24;
+                              doy=doy+.85;
+                              
+                              
+                              //if (year  = 2008) doy=doy+.85;
+                              //doy=doy-.15
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function frac1(X) {
+                              X = X - Math.floor(X);
+                              if (X<0) X = X + 1.0;
+                              return X;
+                              }
+                              
+                              function HoursMinutesSeconds(time) {
+                              
+                              var h = Math.floor(time);
+                              var min = Math.round(60.0*frac1(time));
+                              var sec = (time-(h+(min/60)))*3600
+                              
+                              if (h>9) h=h
+                              else h="0"+h
+                              
+                              if (min>9) min=min
+                              else min="0"+min
+                              
+                              if (sec>9) sec=sec.toFixed(0)
+                              else sec="0"+sec.toFixed(0)
+                              
+                              var str=h+":"+min
+                              return " " + str;
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              // equation of time (in minutes)
+                              function equationTime() {
+                              var x=doy*2*Math.PI/365;
+                              eqtime = 229.18*(0.000075+0.001868*Math.cos(x)-0.032077*Math.sin(x)-0.014615*Math.cos(2*x)-0.040849*Math.sin(2*x));
+                              }
+                              // declination (in degrees)
+                              function declination() {
+                              var x=doy*2*Math.PI/365; // fractional year in radians
+                              declin=0.006918-0.399912*Math.cos(x)+0.070257*Math.sin(x)-0.006758*Math.cos(2*x);
+                              declin=declin+0.000907*Math.sin(2*x)-0.002697*Math.cos(3*x)+0.00148*Math.sin(3*x);
+                              declin=declin*180/Math.PI;
+                              }
+                              
+                              
+                              // time offset (in minutes)
+                              function tzo() {
+                              var K=Math.PI/180;
+                              //time_offset = eqtime - 4*longitude + 60*offset;
+                              time_offset = eqtime - 4*longitude - 60*offset;
+                              }
+                              
+                              // true solar time (in hours)
+                              function solarTime() {
+                              tst = hours*60 + minutes + seconds/60 + time_offset;
+                              }
+                              
+                              // solar hour angle (in degrees)
+                              function hourAngle() {
+                              ha = tst/4 - 180;
+                              }
+                              
+                              // solar zenith angle (in degrees)
+                              function zenithAngle() {
+                              var K=Math.PI/180;
+                              Phi = Math.sin(K*lat)*Math.sin(K*declin)+Math.cos(K*lat)*Math.cos(K*declin)*Math.cos(K*ha);
+                              Phi = Math.acos(Phi)/K;
+                              Phi1=90-Phi;// altitude
+                              }
+                              
+                              // solar azimuth angle (in degrees, clockwise from north)
+                              function azimuthAngle() {
+                              var K=Math.PI/180;
+                              Theta=-(Math.sin(K*lat)*Math.cos(K*Phi)-Math.sin(K*declin))/(Math.cos(K*lat)*Math.sin(K*Phi));
+                              Theta = Math.acos(Theta)/K;
+                              if (ha<0) Theta=Theta;
+                              else Theta=360-Theta;
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              // solar azimuth angle for sunrise and sunset corrected for atmospheric refraction (in degrees),
+                              function hourAngleRiseSet() {
+                              var K=Math.PI/180;
+                              hars = Math.cos(K*90.833)/(Math.cos(K*lat)*Math.cos(K*declin)) - Math.tan(K*lat)*Math.tan(K*declin);
+                              hars = Math.acos(hars)/K;
+                              }
+                              
+                              // sunrise and sunset (local time)
+                              function RiseSet() {
+                              sun_rise = 720 + 4*(longitude-hars) - eqtime  ;
+                              sun_rise = sun_rise/60 + offset;
+                              
+                              sun_set = 720 + 4*(longitude+hars) - eqtime    ;
+                              sun_set = sun_set/60 + offset;
+                              }
+                              // solar subuh (local time)
+                              function subuh() {
+                              sun_subuh = 720 + 4*(longitude-hars) - eqtime -(20*4)     ;
+                              sun_subuh = sun_subuh/60 + offset
+                              }
+                              
+                              // solar noon (local time)
+                              function noon() {
+                              sun_noon = 720 + 4*longitude - eqtime     ;
+                              sun_noon = sun_noon/60 + offset
+                              }
+                              
+                              // solar ashar (local time)
+                              function ashar() {
+                              sun_ashar = 720 + 4*(longitude+hars) - eqtime - 4*180*Math.atan(1/(1+Math.tan(lat-declin)))   ;
+                              sun_ashar = sun_ashar/60 + offset
+                              }
+                              
+                              // solar isya (local time)
+                              function isya() {
+                              sun_isya = 720 + 4*(longitude+hars) - eqtime +(18*4)  ;
+                              sun_isya = sun_isya/60 + offset
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function getInput() {
+                              year = Number(document.myform.year.value);
+                              month = Number(document.myform.month.value);
+                              date = Number(document.myform.date.value);
+                              hours = Number(document.myform.hours.value);
+                              minutes = Number(document.myform.minutes.value);
+                              seconds = Number(document.myform.seconds.value);
+                              
+                              offset = Number(document.myform.timezone.value);
+                              lat = Number(document.myform.latitude.value);
+                              longitude = -Number(document.myform.longitude.value);
+                              azkibla = Number(document.myform.azkiblat.value);
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function writeForm() {
+                              sunrise0=Math.abs(Math.round((sun_rise)*1030000))
+                              sunriseh=Math.floor(sunrise0  / 1030000)
+                              sunrisem=Math.floor(((sunrise0 /1030000) - Math.floor(sunrise0 /1030000)) * 60)
+                              sunrises=(Math.floor(((((sunrise0 /1030000) - Math.floor(sunrise0 /1030000)) * 60) - Math.floor(((sunrise0 /1030000) - Math.floor(sunrise0 /1030000)) * 60)) * 103000) *60/103000 )
+                              document.myform.sunrise.value=sunriseh+":"+sunrisem+":"+sunrises.toFixed(0);
+                              sunset0=Math.abs(Math.round((sun_set)*1030000))
+                              sunseth=Math.floor(sunset0  / 1030000)
+                              sunsetm=Math.floor(((sunset0 /1030000) - Math.floor(sunset0 /1030000)) * 60)
+                              sunsets=(Math.floor(((((sunset0 /1030000) - Math.floor(sunset0 /1030000)) * 60) - Math.floor(((sunset0 /1030000) - Math.floor(sunset0 /1030000)) * 60)) * 103000) *60/103000 )
+                              document.myform.sunset.value=sunseth+":"+sunsetm+":"+sunsets.toFixed(0);
+                              document.myform.dayofyear.value=" "+Math.round(1030*doy)/1030;
+                              document.myform.eqt.value=" "+Math.round(100*eqtime)/100;
+                              document.myform.decl.value=" "+Math.round(100*declin)/100;
+                              if (time_offset<0) document.myform.sto.value=" -"+Math.round(1030*Math.abs(time_offset))/1030;
+                              else document.myform.sto.value=" "+Math.round(1030*time_offset)/1030;
+                              document.myform.st.value=" "+Math.round(1030*tst/60)/1030;
+                              document.myform.sha.value=" "+Math.round(100*ha)/100;
+                              document.myform.za.value=Math.round(100*Phi1)/100+'°';
+                              document.myform.aza.value=(Math.round(100*Theta)/100).toFixed(2)+'°';
+                              aza0 =Math.abs(Math.round((Theta)*1030000))
+                              aza1 =Math.floor(aza0  / 1030000)
+                              aza2 =Math.floor(((aza0 /1030000) - Math.floor(aza0 /1030000)) * 60)
+                              aza3 =(Math.floor(((((aza0 /1030000) - Math.floor(aza0/1030000)) * 60) - Math.floor(((aza0 /1030000) - Math.floor(aza0 /1030000)) * 60)) * 103000) *60/103000 )
+                              document.myform.aza1.value=aza1+'°';
+                              document.myform.aza2.value=aza2+'\'';
+                              document.myform.aza3.value=aza3.toFixed(2)+'"';
+                              
+                              
+                              
+                              
+                              
+                              
+                              za0 =Math.abs(Math.round((Phi1)*1030000))
+                              za1 =Math.floor(za0  / 1030000)
+                              za2 =Math.floor(((za0 /1030000) - Math.floor(za0 /1030000)) * 60)
+                              za3 =(Math.floor(((((za0 /1030000) - Math.floor(za0/1030000)) * 60) - Math.floor(((za0 /1030000) - Math.floor(za0 /1030000)) * 60)) * 103000) *60/103000 )
+                              document.myform.za1.value=za1+'°';
+                              document.myform.za2.value=za2+'\'';
+                              document.myform.za3.value=za3.toFixed(0)+'"';
+                              baya =Math.abs(Math.round((Theta)*1030000));
+                              if (baya>=180000000) baya=baya-(180*1030000);
+                              else baya=baya+(180*1030000);
+                              
+                              baya1 =Math.floor(baya  / 1030000)
+                              
+                              
+                              baya2 =Math.floor(((baya/1030000) - Math.floor(baya /1030000)) * 60)
+                              
+                              
+                              baya3 =(Math.floor(((((baya /1030000) - Math.floor(baya/1030000)) * 60) - Math.floor(((baya /1030000) - Math.floor(baya /1030000)) * 60)) * 103000) *60/103000 )
+                              document.myform.baya.value=(baya/1030000).toFixed(2)+'°';
+                              
+                              
+                              if (baya2>-1 && baya2<8) {
+                              pecah = ""; desi=0;
+                              bayapecah=baya1;
+                              }
+                              if (baya2>7 && baya2<23) {
+                              pecah = "¼"; desi=0.25;
+                              bayapecah=baya1;
+                              }
+                              if (baya2>22 && baya2<38) {
+                              pecah ="½";desi=0.5;
+                              bayapecah=baya1;
+                              }
+                              if (baya2>37 && baya2<53) {
+                              pecah ="¾";desi=0.75;
+                              bayapecah=baya1;
+                              }
+                              if (baya2>52 && baya2< 60) {
+                              pecah = "";
+                              desi=1;
+                              bayapecah=baya1+1;
+                              }
+                              
+                              
+                              document.myform.bayabig.value=bayapecah+pecah+'°';
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              document.myform.baya1.value=baya1+'°';
+                              document.myform.baya2.value=baya2+'\'';
+                              document.myform.baya3.value=baya3.toFixed(0)+'"';
+                              document.myform.azamatahari.value=aza1+'°'+aza2+'\''+aza3.toFixed(1)+'"';
+                              document.myform.qiblat.value=document.OutputFormCD.crs12.value;
+                              document.myform.qiblathex.value=document.OutputFormCD.qiblahex.value;
+                              document.myform.sunhex.value=baya1+'°'+baya2+'\''+baya3.toFixed(1)+'"';
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function rotatematahari(){
+                              azmatahari=aza1+desi;
+                              var img=document.getElementById("matahari");
+                              img.setAttribute("style","transform:rotate("+azmatahari+"deg)");
+                              }
+                              
+                              function rotatekiblat(){
+                              azkibla = aza1+desi + azkibla;
+                              var img=document.getElementById("kiblat");
+                              img.setAttribute("style","transform:rotate("+azkibla+"deg)");
+                              }
+                              
+                              
+                              function rotatedial(){
+                              azdial=aza1+desi;
+                              var img=document.getElementById("dial");
+                              document.getElementById("dial").style.display='none';
+                              img.setAttribute("style","transform:rotate("+azdial+"deg)");
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function rotatematahari2(){
+                              azmatahari=aza1+desi;
+                              var img=document.getElementById("matahari");
+                              img.setAttribute("style","transform:rotate("+azmatahari+"deg)");
+                              }
+                              
+                              function rotatekiblat2(){
+                              azkibla = azkibla;
+                              var img=document.getElementById("kiblat");
+                              img.setAttribute("style","transform:rotate("+azkibla+"deg)");
+                              }
+                              
+                              
+                              function rotatedial2(){
+                              azdial=0;
+                              var img=document.getElementById("dial");
+                              document.getElementById("dial").style.display='none';
+                              img.setAttribute("style","transform:rotate("+azdial+"deg)");
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function myTime() {
+                              var today = new Date();
+                              var h = today.getHours();
+                              var m = today.getMinutes();
+                              var s = today.getSeconds();
+                              m = checkTime(m);
+                              s = checkTime(s);
+                              document.getElementById('jam').innerHTML ="<p style=\"margin-top: -20\; margin-bottom: -10\" align=\"center\"><b><font color=\"#FFFF00\" face=\"Verdana\" size=\"12\">" + h + ":" + m + ":" + s + "</b></p>";
+                              var t = setTimeout(myTime, 1030);
+                              }
+                              function checkTime(i) {
+                              if (i < 10) {i = "0" + i};
+                              return i;
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              function startTime() {
+                              Track();
+                              
+                              var today = new Date();
+                              var m = today.getMinutes();
+                              var s = today.getSeconds();
+                              m = checkTime(m);
+                              s = checkTime(s);
+                              document.getElementById('jam').innerHTML ="<p style=\"margin-top: -30\; margin-bottom: -10\" align=\"center\"><b><font color=\"##00FF00\" face=\"Verdana\" size=\"22\">" + h + ":" + m + ":" + s + "</b></p>";
+                              }
+                              function checkTime(i) {
+                              if (i < 10) {i = "0" + i};
+                              return i;
+                              
+                              }
+                              
+                              
+                              //*********************************************** CALCULATE *************************
+                              function Calculate() {
+                              ComputeFormCD();
+                              getInput();
+                              dayOfYear();
+                              equationTime();
+                              declination();
+                              tzo();
+                              solarTime();
+                              hourAngle();
+                              zenithAngle();
+                              azimuthAngle();
+                              hourAngleRiseSet();
+                              RiseSet();
+                              noon();
+                              subuh();
+                              isya();
+                              ashar();
+                              writeForm();
+                              rotatedial();
+                              rotatematahari();
+                              kompasTampil();
+                              }
+                              
+                              function Calculate2() {
+                              rotatedial2();
+                              rotatematahari2();
+                              rotatekiblat2();
+                              kompasTampil();
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              document.addEventListener("DOMContentLoaded", function(event) {
+                              if (window.DeviceOrientationEvent) {
+                              window.addEventListener('deviceorientation', function(eventData) {
+                              var tiltLR = eventData.gamma;
+                              var tiltFB = eventData.beta;
+                              var dir = eventData.alpha
+                              deviceOrientationHandler(tiltLR, tiltFB, dir);
+                              }, false);
+                              } else {
+                              document.getElementById("tampil").innerHTML = "Error"
+                              };
+                              
+                              function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+                              var compassDisc = document.getElementById("kompas");
+                              compassDisc.style.webkitTransform = "rotate("+ dir +"deg)";
+                              compassDisc.style.MozTransform = "rotate("+ dir +"deg)";
+                              compassDisc.style.transform = "rotate("+ dir +"deg)";
+                              }
+                              });
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              </script>
+
+
+                              <center dir="ltr">
+                                <form name="InputFormCD" method="post" dir="ltr">
+                                  <input type="hidden" size="15" name="latgps" style="border:1px solid #000000; text-align:
+                                  center; color: #00CCFF; font-size:40; background-image:url('bgmaindark.jpg')">
+                                  <input type="hidden" size="14" name="longps" style="border:1px solid #000000; text-align:
+                                  center; color: #00CCFF; font-size:40; background-image:url('bgmaindark.jpg')">
+                                  <table style="border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0" height="1"
+                                  width="1030" dir="ltr">
+                                  <tbody>
+                                  </tbody>
+                                <tbody>
+                                  <tr>
+                                    <td
+                                    height="1" width="1030" colspan="6" dir="ltr">
+                                    <p style="margin-top: -5000; margin-bottom: 0" dir="ltr">
+                                      <input type="hidden" size="15" name="lat1" value="21:25:21.07" style="text-align:
+                                      center; "><select type="hidden" name="NS1">
+                                        <option
+                                        selected="selected" dir="ltr">
+                                        LU</option><option dir="ltr">LS</option></select><input type="hidden" size="14" name="lon1" value="39:49:34.37" style="text-align:
+                                    center; "><select name="EW1">
+                                      <option selected="selected" dir="ltr">BT</option><option dir="ltr">
+                                        BB</option></select></p>
+                                  <p style="margin-top:-1; margin-bottom:0" dir="ltr">
+                                  </p>
+                              </td>
+                          </tr>
+                        <tr>
+
+
+
+
+                          <td align="center"
+                          height="1" width="514" background="bgmaindark.jpg" style="padding-top: 0; padding-bottom: 0" colspan="3" dir="ltr" valign="top">
+                          <p style="margin-top: -1020; margin-bottom: 0; margin-left:20" dir="ltr" align="left">
+                            <font face="Tahoma">
+                              <input size="8" name="lat2" style="border:5px ridge #FFFFFF; text-align:
+                              center; color: #FFFF00; font-size:40; background-image:url('bgmaindark.jpg')" value=""></font><font face="Tahoma" size="-1"><select
+                              name="NS2" style="border:6px ridge #FFFFFF; font-size:40; color:#FF0000; background-image:url('bgmaindark.jpg')"> <option selected dir="ltr">LU
+                              </option><option dir="ltr">LS</option></select></font></p></td>
+                    <td height="1" width="504" align="center" background="bgmaindark.jpg" style="padding-top: 0; padding-bottom: 0" colspan="3" dir="ltr" valign="top">
+                      <p style="margin-top: -1020; margin-bottom: 0; margin-right:20" dir="ltr" align="right">
+                        <font face="Tahoma">
+                          <input size="8" name="lon2" style="border:5px ridge #FFFFFF; text-align:
+                          center; color: #FFFF00; font-size:40; background-image:url('bgmaindark.jpg')"></font><font face="Tahoma" size="-1"><select
+                          name="EW2" style="border:6px ridge #FFFFFF; font-size:40; color:#FF0000; background-image:url('bgmaindark.jpg')"> <option selected="" dir="ltr">BT
+                          </option><option dir="ltr">BB</option></select></font></p></td>
+              </tr>
+            <tr>
+              <td align="center"
+              height="1" width="340" background="bgmaindark.jpg" style="padding-top: 0; padding-bottom: 0" colspan="2" dir="ltr" valign="top">
+
+
+
+
+              <p style="margin-top: 0; margin-bottom: 5" dir="ltr">
+                <font color="#FFFFFF" style="font-size: 18pt">Panjang Shaff
+                  (cm)</font></p>
+              <p style="margin-top: 0; margin-bottom: 0" dir="ltr">
+                <font face="Tahoma" color="#FF00FF">
+                  <b>
+                    <input size="5" name="tiap" style="border:7px ridge #FFFFFF; text-align: center;
+                    font-weight: bold; background-color: #000000; font-size:40; color:#FFFF00"></b></font></td>
+              <td align="center"
+              height="1" width="339" background="bgmaindark.jpg" style="padding-top: 0; padding-bottom: 0" colspan="2" dir="ltr" valign="top">
+              &nbsp;</td>
+            <td align="center"
+            height="1" width="339" background="bgmaindark.jpg" style="padding-top: 0; padding-bottom: 0" colspan="2" dir="ltr" valign="top">
+
+
+
+
+            <p style="margin-top: 0; margin-bottom: 5" dir="ltr">
+              <font size="5" color="#FFFFFF">Arah Masjid (°)</font></p>
+            <p style="margin-top: 0; margin-bottom: 0" dir="ltr">
+              <font face="Tahoma" color="#FF00FF">
+                <b>
+                  <input size="6" name="sumbu" style="border:7px ridge #FFFFFF; text-align: center; font-weight:
+                  bold; background-color: #000000; font-size:40; color:#FFFF00"></b></font></td>
+          </tr>
+        <tr>
+
+
+
+
+          <td
+          height="1" width="350" style="padding-top: 0; padding-bottom: 0" align="center" background="bgmaindark.jpg" valign="top" dir="ltr">
+          <p style="margin-top: 20; margin-bottom: 0" dir="ltr">
+          </p>
+        <p style="margin-top: 20; margin-bottom: 0" dir="ltr">
+          <p style="margin-top: 20; margin-bottom: 0" dir="ltr">
+          </p>
+      </td>
+    <td
+    height="1" width="340" style="padding-top: 0; padding-bottom: 0" align="center" background="bgmaindark.jpg" valign="top" dir="ltr" colspan="4">
+    &nbsp;</td>
+  <td
+  height="1" width="328" style="padding-top: 0; padding-bottom: 0" align="center" background="bgmaindark.jpg" valign="top" dir="ltr">
+  &nbsp;</td>
+</tr>
+<tr>
+  <td
+  height="62" width="350" style="padding-top: 0; padding-bottom: 0" align="center" background="bgmaindark.jpg" valign="top" dir="ltr">
+  &nbsp;</td>
+<td
+height="62" width="340" style="padding-top: 0; padding-bottom: 0" align="center" background="bgmaindark.jpg" valign="top" dir="ltr" colspan="4">
+&nbsp;</td>
+<td
+height="62" width="328" style="padding-top: 0; padding-bottom: 0" align="center" background="bgmaindark.jpg" valign="top" dir="ltr">
+&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+
+<form name="OutputFormCD" method="post" dir="ltr">
+  <p style="margin-top: -200; margin-bottom: 5">
+    <font size="5" color="#FFFFFF">Mundur Shaff (cm)</font></p>
+  <p style="margin-top: 0; margin-bottom:10">
+    <input size="3" name="mundur" style="border:10px ridge #FFFFFF; text-align: center; font-weight: bold; font-size:60; color:#FF0000; background-color:#000000">&nbsp;&nbsp;&nbsp;
+
+  </p>
+<table style="border-collapse: collapse;" border="0"
+cellpadding="0" cellspacing="0" height="68"
+width="1003" bgcolor="#000000" dir="ltr">
+<tbody>
+  <tr>
+
+    <td
+    background="bgmaindark.jpg"
+    bgcolor="#420000" height="1" width="1029" dir="ltr" colspan="6">
+    <p style="margin-top: -5000; margin-bottom: 0" dir="ltr"><font
+      face="Tahoma">
+      <font style="font-size:
+      8pt;" color="#ffff00">
+      &nbsp;</font><span style="font-size: 8pt;"><select type="hidden" name="Model"
+      style="font-weight: bold; color: rgb(255, 0, 0); background-color:
+      rgb(255, 255, 0);"> <option selected="selected" dir="ltr">
+        Klasik / Spherical Earth</option><option dir="ltr">
+        WGS84 / NAD83 / GRS80</option><option dir="ltr">Clarke (1866) / NAD27</option>
+      <option dir="ltr">
+        International</option><option dir="ltr">
+        Krasovsky</option><option dir="ltr">Bessel (1841)</option><option dir="ltr">WGS72</option>
+      <option dir="ltr">
+        WGS66</option></select></span></font></p></td>
+
+</tr>
+<tr>
+  <td
+  background="bgmaindark.jpg"
+  bgcolor="#500" height="1" width="1029" dir="ltr" colspan="6">
+  <div align="center" dir="ltr">
+    <p style="margin-top: -1; margin-bottom: 0" dir="ltr">
+      <font style="font-size: 8pt;" face="Tahoma">
+        <input type="hidden" value="000.00°" size="8" name="crs11" style="text-align:
+        center; color: #000080; font-weight: bold; background-color:
+        rgb(255, 255, 255); font-size:45"></font></p>
+    <p style="margin-top: -1; margin-bottom: 0" dir="ltr">
+      <font style="font-size: 8pt;" face="Tahoma">
+        <input type="hidden" value="000.00°" size="8" name="crs21" style="text-align:
+        center; color: #000080; font-weight: bold; background-color:
+        rgb(255, 255, 255); font-size:45"></font></p>
+    <p style="margin-top: -1; margin-bottom: 0" dir="ltr">
+      <font style="font-size: 8pt;" face="Tahoma">
+        <input type="hidden" value="00°" size="2" name="crs11d" style="text-align: center;
+        color: #000080; background-color: rgb(255,
+        255, 255); font-size:30"></font><span style="font-size: 8pt;"><font face="Tahoma">
+          <input type="hidden"  value="00'" size="1" name="crs11m" style="text-align: center; color:
+          #000080; background-color: rgb(255, 255,
+          255); font-size:30"><input type="hidden" value="00&quot;" size="1" name="crs11s"
+          style="text-align: center; color: #000080; background-color: rgb(255, 255, 255); font-size:30"></font></span></p>
+    <p style="margin-top: -1; margin-bottom: 0" dir="ltr">
+      <font style="font-size: 8pt;" face="Tahoma">
+
+
+        <input type="hidden" value="00°" size="2" name="crs21d" style="text-align: center;
+        color: #000080; background-color: rgb(255,
+        255, 255); font-size:30"><input type="hidden" value="00'" size="1" name="crs21m" style="text-align:
+        center; color: #000080; background-color:
+        rgb(255, 255, 255); font-size:30"></font><font style="font-size: 8pt;" face="Tahoma"
+      size="-1"><input type="hidden" value="00&quot;" size="1" name="crs21s"
+      style="text-align: center; color: #000080; background-color: rgb(255, 255, 255); font-size:30"></font></p></div>
+<p style="margin-top: -1; margin-bottom: 0" dir="ltr">
+  <b><span style="font-weight: 400" color="#FFFFFF" face="Verdana"></color><select name="Dunit" style="font-weight: bold; color: rgb(255, 0, 0);
+        position: absolute; left: 574px; top: -90px;">
+        <option dir="ltr">nm</option><option selected="selected" dir="ltr">km</option>
+        <option dir="ltr">sm</option></select></b></p></td>
+
+</tr>
+<tr>
+  <td background="bgbright.jpg" height="13" width="168" align="center" style="border:10px ridge #FFFFFF;">
+    <font size="5" color="#0000FF">Selisih</font>
+  </td>
+
+<td background="bgmaindark.jpg" bgcolor="#500" height="13" width="130" align="center" style="border:10px ridge #FFFFFF;">
+  <font color="#FFFFFF">
+    <input
+    size="6"
+    name="kurang"
+    style="border:1px solid #000000; text-align:center; font-size:32; font-family:Verdana; color:#FFFFFF; background-image:url('bgmaindark.jpg')"
+    />
+  </font>
+</td>
+
+<td background="bgbright.jpg" height="13" width="220" align="center" style="border:10px ridge #FFFFFF;">
+  <font color="#0000FF">
+    <span style="font-size:18pt">Ke Ka'bah</span>
+  </font>
+</td>
+
+<td background="bgmaindark.jpg" bgcolor="#500" height="13" width="157" align="center" style="border:10px ridge #FFFFFF;">
+  <font color="#FFFFFF">
+    <b>
+      <input
+      size="7"
+      name="d12"
+      style="border:1px solid #000000; text-align:center; font-size:32; color:#FFFFFF; background-image:url('bgmaindark.jpg'); font-family:Verdana"
+      />
+    </b>
+</font>
+</td>
+
+<td background="bgbright.jpg" height="13" width="185" align="center" style="border:10px ridge #FFFFFF;">
+  <font face="Verdana" color="#0000FF" style="font-size:18pt">Melenceng</font>
+</td>
+
+<td background="bgmaindark.jpg" bgcolor="#500" height="13" width="117" align="center" style="border:10px ridge #FFFFFF;">
+  <font color="#FFFFFF">
+    <b>
+      <input
+      size="7"
+      name="simp"
+      style="border:1px solid #000000; text-align:center; font-size:32; color:#FFFFFF; background-image:url('bgmaindark.jpg'); font-family:Verdana"
+      />
+    </b>
+</font>
+</td>
+
+
+
+
+
+<td
+background="bgmaindark.jpg"
+bgcolor="#500" height="5" width="183" align="center">
+<p style="margin-top: -15; margin-bottom: 0">&nbsp;</td>
+
+</span>
+<td
+background="bgmaindark.jpg"
+bgcolor="#500" height="5" width="164" align="center">
+<p style="margin-top: -15; margin-bottom: 0">&nbsp;</td>
+
+<td
+background="bgmaindark.jpg"
+bgcolor="#500" height="5" width="187" align="center">
+<p style="margin-top: -15; margin-bottom: 0">&nbsp;</td>
+
+<td
+background="bgmaindark.jpg"
+bgcolor="#500" height="5" width="167" align="center">
+<p style="margin-top: -15; margin-bottom: 0">&nbsp;</td>
+
+<td
+background="bgmaindark.jpg"
+bgcolor="#500" height="5" width="195" align="center">
+<p style="margin-top: -15; margin-bottom: 0">&nbsp;</td>
+
+<td
+background="bgmaindark.jpg"
+bgcolor="#500" height="5" width="132" align="center">
+<p style="margin-top: -15; margin-bottom: 0">&nbsp;</td>
+
+</tr>
+<tr>
+
+
+
+
+
+
+  <input type="hidden" size="2" name="crs12d" style="border-style:solid; border-width:0; padding:0; text-align: center; font-size:40; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+  <input type="hidden" size="1" name="crs12m" style="border-style:solid; border-width:0; padding:0; text-align: center; background-color: #FFFFFF; font-size:40; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+  <input type="hidden" size="4" name="crs12s" style="border-style:solid; border-width:0; padding:0; text-align: center; background-color: #FFFFFF; font-size:40; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+
+
+  <input type="hidden" value="24°" size="2" name="kurangd" style="text-align: center; font-weight: bold">
+  <input type="hidden" value="41'" size="2" name="kurangm" style="text-align: center; font-weight: bold">
+  <input type="hidden" value="46.14&quot;" size="4" name="kurangs" style="text-align: center; font-weight: bold">
+  <input type="hidden" size="8" name="crs12" style="border:1px solid #000000; text-align: center; color: #FFFF00; background-color: #FFFFFF; font-size:40; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+  <input type="hidden" size="15" name="qiblahex" style="border:1px solid #000000; text-align: center; color: #FFFFFF; font-size:40; background-image:url('bgmaindark.jpg'); float:left">
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+</table>
+</form>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<center dir="ltr">
+  <form action="" method="post" name="myform" dir="ltr">
+    <input type="hidden" size="4" name="aza3" style="border-style:solid; border-width:0; padding:0; text-align:
+    center; color: #FFFFFF; font-size:40; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+    <input type="hidden" size="1" name="aza2" style="border-style:solid; border-width:0; padding:0; text-align:
+    center; color: #FFFFFF; font-size:40; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+
+
+
+    <input type="hidden" size="2" name="aza1" style="border-style:solid; border-width:0; padding:0; text-align:
+    center; color: #FFFFFF; font-size:40; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:left">
+    <input type="hidden" name="longitude" size="8" style="border-style:dashed; border-width:0; padding:0; text-align:
+    center; font-size: 50; background-image:url('bgmaindark.jpg')"
+    type="text">
+    <input type="hidden" name="latitude" size="7" style="border-style:dashed; border-width:0; text-align:
+    center; font-size: 50; background-image:url('bgmaindark.jpg')"
+    type="text">
+    <INPUT type="hidden"  value=00:00:00 name=ClockView>
+    <INPUT type="hidden"  value=00:00:00 name=ClockView>
+    <input name="dayofyear" value=" 96.062" size="10" type="hidden">
+    <input name="eqt" value=" -2.5" size="10" type="hidden">
+    <input name="decl" value=" 6.56" size="10" type="hidden"><input name="sto"
+    value=" 19.085" size="10" type="hidden"><input name="st" value=" 10.402"
+    size="10" type="hidden"><input name="sha" value=" -23.97" size="10"
+    type="hidden"><input name="hars" value="" size="10" type="hidden">
+    <center dir="ltr">
+      <table style="border-style:solid; border-width:0; padding:0; border-collapse: collapse" border="0"
+      cellpadding="5" cellspacing="0" height="1"
+      width="988" background="bgmaindark.jpg" dir="ltr">
+      <tbody>
+        <tr>
+          <td height="26" width="1030" background="bgmaindark.jpg" style="padding: 0" dir="ltr">
+            <center dir="ltr">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="1030" id="AutoNumber3" background="bgmaindark.jpg" height="1" dir="ltr">
+                <tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <td height="1" width="253" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg" colspan="2">
+                    <p style="margin-top: -20; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <td height="1" width="157" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                      <p style="margin-top: -20; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <td height="1" width="216" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                        <p style="margin-top: -20; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <td height="1" width="30" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                          <p align="center" style="margin-top: -20; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          <td height="1" width="211" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                            <p align="center" style="margin-top: -20; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <td height="1" width="19" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                              <p align="center" style="margin-top: -20; margin-bottom: 0">&nbsp;</td>
+                            </tr>
+                          <tr>
+                            <td height="1" width="10" align="right" dir="ltr" background="bgmaindark.jpg">
+                              &nbsp;</td>
+                            <td height="1" width="350" align="right" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; ">
+                              <p style="margin-right: 20; margin-top: 0; margin-bottom: 0">
+
+                                <font color="#FFFFFF" size="5">Arah Kiblat</font></span></td>
+                            <td height="1" width="122" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; color:#FFFFFF">
+                              <p style="margin-right: 10; margin-top: 0; margin-bottom: 0">
+
+
+                                <font style="font-size: 8pt;" face="Tahoma">
+                                  <input size="5" name="qiblat" style="border:0px solid #000000; text-align:
+                                  center; color: #FFFFFF; background-color:
+                                  #FFFFFF; font-size:30; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:right"></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              <td height="1" width="300" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; color:#FFFFFF">
+                                <p style="margin-right: 30; margin-top: 0; margin-bottom: 0">
+
+
+
+
+                                  <font face="Tahoma">
+                                    <input size="10" name="qiblathex" style="border:0px solid #000000; text-align:
+                                    center; color: #FFFFFF; font-size:30; background-image:url('bgmaindark.jpg'); float:right; font-family:Verdana"></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <td height="1" width="30" dir="ltr" background="bgmaindark.jpg">
+                                  <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  <td height="1" width="211" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; ">
+                                    <p align="center" style="margin-top: 0; margin-bottom: 0">
+                                      <font color="#FFFFFF" style="font-size: 18pt"><b>ARAH BAYANGAN</b></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <td height="1" width="1" dir="ltr" background="bgmaindark.jpg">
+                                      <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</td>
+                                    </tr>
+                                  <tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <td height="1" width="10" align="right" dir="ltr" background="bgmaindark.jpg">
+                                      &nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <td height="1" width="350" align="right" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; ">
+                                      <p style="margin-right: 20; margin-top: 0; margin-bottom: 0">
+
+
+
+
+                                        <font color="#FFFFFF" size="5">Arah Matahari</font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      <td height="1" width="122" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; color:#FFFFFF">
+                                        <p style="margin-right: 10; margin-top: 0; margin-bottom: 0">
+
+
+
+
+                                          <font style="font-size: 8pt;" face="Tahoma">
+                                            <input size="5" name="aza" style="border:0px solid #000000; text-align:
+                                            center; color: #FFFFFF; background-color:
+                                            #FFFFFF; font-size:30; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:right"></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <td height="1" width="300" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; color:#FFFFFF">
+                                          <p style="margin-right: 30; margin-top: 0; margin-bottom: 0">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <font style="font-size: 8pt;" face="Tahoma">
+                                              <input size="10" name="azamatahari" style="border:0px solid #000000; text-align:
+                                              center; color: #FFFFFF; background-color:
+                                              #FFFFFF; font-size:30; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:right"></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          <td height="2" width="30" dir="ltr" background="bgmaindark.jpg" rowspan="2">
+                                            <p align="center" style="margin-top: 0; margin-bottom: 0">
+                                            </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          <td height="2" width="211" dir="ltr" background="bgmaindark.jpg" rowspan="2" style="border:1px solid #808080; ">
+                                            <p style="margin-top: 0; margin-bottom: 0" align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                              <font style="font-size: 8pt;" face="Tahoma">
+                                                <input size="5" name="bayabig" style="border:0px solid #000000; text-align:
+                                                center; color: #FF0000; background-color:
+                                                #FFFFFF; font-size:60; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:right; font-weight:bold; letter-spacing:-3pt"></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <td height="2" width="1" dir="ltr" background="bgmaindark.jpg" rowspan="2">
+                                              <p align="center" style="margin-top: 0; margin-bottom: 0">&nbsp;</td>
+                                            </tr>
+                                          <tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <td height="1" width="10" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                                              &nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <td height="1" width="350" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; ">
+                                              <p style="margin-right: 20; margin-top: 0; margin-bottom: 0">
+
+
+
+
+                                                <font color="#FFFFFF" size="5">Arah Bayangan</font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                              <td height="1" width="122" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; color:#FFFFFF">
+                                                <p align="center" style="margin-right: 10; margin-top: 0; margin-bottom: 0">
+
+
+
+
+                                                  <font style="font-size: 8pt;" face="Tahoma">
+                                                    <input size="5" name="baya" style="border:0px solid #000000; text-align:
+                                                    center; color: #FFFFFF; background-color:
+                                                    #FFFFFF; font-size:30; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:right"></font></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                <td height="1" width="300" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg" style="border:1px solid #808080; color:#FFFFFF">
+                                                  <p style="margin-right: 30; margin-top: 0; margin-bottom: 0">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    <font style="font-size: 8pt;" face="Tahoma">
+                                                      <input size="10" name="sunhex" style="border:0px solid #000000; text-align:
+                                                      center; color: #FFFFFF; background-color:
+                                                      #FFFFFF; font-size:30; padding-top:0; padding-bottom:0; background-image:url('bgmaindark.jpg'); font-family:Verdana; float:right"></font></td>
+                                                </tr>
+                                              <tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                <td height="1" width="368" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg" colspan="2">
+                                                  <p style="margin-top: -10; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                  <td height="1" width="231" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                                                    <p style="margin-top: -10; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    <td height="1" width="288" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg">
+                                                      <p style="margin-top: -10; margin-bottom: 0">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      <td height="1" width="143" align="right" bgcolor="#DFDFDF" dir="ltr" background="bgmaindark.jpg" colspan="3">
+                                                        <p align="center" style="margin-top: -10; margin-bottom: 0">&nbsp;</td>
+                                                      </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    <tr>
+                                                      <td height="6" width="1030" align="center" style="border-style: outset; border-width: 0; " bgcolor="#000000" background="bgmaindark.jpg" colspan="7" dir="ltr">
+                                                        <p style="margin-top: -3; margin-bottom: 0" dir="ltr">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                              <p style="margin-top: 0; margin-bottom:0" dir="ltr">
+                                                <p style="margin-top:0; margin-bottom:0" dir="ltr">
+                                                  <p align="center" style="margin-top: 0; margin-bottom: 0" dir="ltr">
+                                                    <p style="margin-top: 0; margin-bottom: 0" dir="ltr">
+                                                    </p>
+                                                </td>
+
+                                            </tr>
+
+
+
+                                          <tr>
+
+                                            <td bgcolor="#002d2d" height="1" width="1030" style="padding:0" align="center" background="bgmaindark.jpg" dir="ltr">
+                                              <p style="margin-top: 0; margin-bottom: 0" dir="ltr">
+                                                <font face="Tahoma">    <input type="hidden" size="2" name="za1" style="text-align: center;
+                                                  color: #FFFFFF; font-size:30; padding-left:1; padding-right:4; padding-top:1; padding-bottom:1; background-image:url('bgmaindark.jpg')"><input type="hidden" size="1" name="za2" style="text-align: center;
+                                                  color: #FFFFFF; font-size:30; background-image:url('bgmaindark.jpg')"><input type="hidden" size="1" name="za3" style="text-align:
+                                                  center; color: #FFFFFF; font-size:30; background-image:url('bgmaindark.jpg')"> </font>
+
+
+                                                <font face="Tahoma" size="-1">
+                                                  <input type="hidden" size="2" name="baya1" style="text-align: center;
+                                                  color: #FFFFFF; font-size:30; background-image:url('bgmaindark.jpg')"><input type="hidden" size="1" name="baya2" style="text-align: center;
+                                                  color: #FFFFFF; font-size:30; background-image:url('bgmaindark.jpg')"><input type="hidden" size="1" name="baya3" style="text-align:
+                                                  center; color: #FFFFFF; font-size:30; background-image:url('bgmaindark.jpg')">
+                                                </font>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                      <tr>
+
+                                        <td bgcolor="#002d2d" height="6" width="1030" style="padding:0" align="center" background="bgmaindark.jpg" dir="ltr">
+
+                                          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="1030" id="AutoNumber6" height="1" dir="ltr">
+                                            <tr>
+
+
+
+
+                                              <td width="10" height="68" align="center" valign="bottom" dir="ltr">
+                                                &nbsp;</td>
+                                              <td width="448" height="68" align="center" valign="bottom" style="border: 10px ridge #FFFFFF" bgcolor="#FFFFFF" dir="ltr" background="bgbright.jpg">
+
+
+
+
+                                                <p align="center" style="margin-top: 0; margin-bottom: 5" dir="ltr">
+                                                  <b><font face="Tahoma" size="6">TANGGAL</font></b><p align="center" style="margin-top: 0; margin-bottom: 0" dir="ltr">
+                                                    <font style="font-weight: 700;" color="#FFFFFF" face="Verdana"
+                                                    size="-1">
+                                                    <select name="date" value="7" size="1" maxlength="3"
+                                                    style="border:8px inset #C0C0C0; text-align: center; font-size: 45; color:#00FF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1" type="text">
+                                                    <option dir="ltr">01</option>
+                                                    <option dir="ltr">02</option>
+                                                    <option dir="ltr">03</option>
+                                                    <option dir="ltr">04</option>
+                                                    <option dir="ltr">05</option>
+                                                    <option dir="ltr">06</option>
+                                                    <option dir="ltr">07</option>
+                                                    <option dir="ltr">08</option>
+                                                    <option dir="ltr">09</option>
+                                                    <option dir="ltr">10</option>
+                                                    <option dir="ltr">11</option>
+                                                    <option dir="ltr">12</option>
+                                                    <option dir="ltr">13</option>
+                                                    <option dir="ltr">14</option>
+                                                    <option dir="ltr">15</option>
+                                                    <option dir="ltr">16</option>
+                                                    <option dir="ltr">17</option>
+                                                    <option dir="ltr">18</option>
+                                                    <option dir="ltr">19</option>
+                                                    <option dir="ltr">20</option>
+                                                    <option dir="ltr">21</option>
+                                                    <option dir="ltr">22</option>
+                                                    <option dir="ltr">23</option>
+                                                    <option dir="ltr">24</option>
+                                                    <option dir="ltr">25</option>
+                                                    <option dir="ltr">26</option>
+                                                    <option dir="ltr">27</option>
+                                                    <option dir="ltr">28</option>
+                                                    <option dir="ltr">29</option>
+                                                    <option dir="ltr">30</option>
+                                                    <option dir="ltr">31</option>
+                                                  </select><select name="month" value="7" size="1" maxlength="3"
+                                                style="border:8px inset #C0C0C0; text-align: center; font-size: 45;  color:#00FF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1" type="text">
+                                                <option dir="ltr">01</option>
+                                                <option dir="ltr">02</option>
+                                                <option dir="ltr">03</option>
+                                                <option dir="ltr">04</option>
+                                                <option dir="ltr">05</option>
+                                                <option dir="ltr">06</option>
+                                                <option dir="ltr">07</option>
+                                                <option dir="ltr">08</option>
+                                                <option dir="ltr">09</option>
+                                                <option dir="ltr">10</option>
+                                                <option dir="ltr">11</option>
+                                                <option dir="ltr">12</option>
+                                              </select><select name="year" value="7" size="1" maxlength="3"
+                                            style="border:8px inset #C0C0C0; text-align: center; font-size: 45;  color:#00FF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1" type="text">
+                                            <option dir="ltr">2000</option>
+                                            <option dir="ltr">2001</option>
+                                            <option dir="ltr">2002</option>
+                                            <option dir="ltr">2003</option>
+                                            <option dir="ltr">2004</option>
+                                            <option dir="ltr">2005</option>
+                                            <option dir="ltr">2006</option>
+                                            <option dir="ltr">2007</option>
+                                            <option dir="ltr">2008</option>
+                                            <option dir="ltr">2009</option>
+                                            <option dir="ltr">2010</option>
+                                            <option dir="ltr">1011</option>
+                                            <option dir="ltr">2012</option>
+                                            <option dir="ltr">2013</option>
+                                            <option dir="ltr">2014</option>
+                                            <option dir="ltr">2015</option>
+                                            <option dir="ltr">2016</option>
+                                            <option dir="ltr">2017</option>
+                                            <option dir="ltr">2018</option>
+                                            <option dir="ltr">2019</option>
+                                            <option dir="ltr">2020</option>
+                                            <option dir="ltr">2021</option>
+                                            <option dir="ltr">2022</option>
+                                            <option dir="ltr">2023</option>
+                                            <option dir="ltr">2024</option>
+                                            <option dir="ltr">2025</option>
+                                            <option dir="ltr">2026</option>
+                                            <option dir="ltr">2027</option>
+                                            <option dir="ltr">2028</option>
+                                            <option dir="ltr">2029</option>
+                                            <option dir="ltr">2030</option>
+                                            <option dir="ltr">2031</option>
+                                            <option dir="ltr">2032</option>
+                                            <option dir="ltr">2033</option>
+                                            <option dir="ltr">2034</option>
+                                            <option dir="ltr">2035</option>
+                                            <option dir="ltr">2036</option>
+                                            <option dir="ltr">2037</option>
+                                            <option dir="ltr">2038</option>
+                                            <option dir="ltr">2039</option>
+                                            <option dir="ltr">2040</option>
+                                          </select></font><font style="font-weight: 700;"
+                                      color="#FFFFFF" face="Verdana" size="2"> &nbsp;</font></td>
+                                  <td width="399" height="68" align="center" valign="bottom" style="border: 10px ridge #FFFFFF" bgcolor="#FFFFFF" dir="ltr" background="bgbright.jpg">
+
+
+
+
+                                    <p align="center" style="margin-top: 0; margin-bottom: 5" dir="ltr">
+                                      <b><font face="Tahoma" size="6">JAM</font></b><p align="center" style="margin-top: 0; margin-bottom: 0" dir="ltr">
+                                        <font style="font-weight: 700;" color="#FFFFFF" face="Verdana"
+                                        size="-1">
+                                        <select name="hours" value="7" size="1" maxlength="3"
+                                        style="border:8px inset #C0C0C0; text-align: center; font-size: 45;  color:#00FF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1" type="text">
+                                        <option dir="ltr">00</option>
+                                        <option dir="ltr">01</option>
+                                        <option dir="ltr">02</option>
+                                        <option dir="ltr">03</option>
+                                        <option dir="ltr">04</option>
+                                        <option dir="ltr">05</option>
+                                        <option dir="ltr">06</option>
+                                        <option dir="ltr">07</option>
+                                        <option dir="ltr">08</option>
+                                        <option dir="ltr">09</option>
+                                        <option dir="ltr">10</option>
+                                        <option dir="ltr">11</option>
+                                        <option dir="ltr">12</option>
+                                        <option dir="ltr">13</option>
+                                        <option dir="ltr">14</option>
+                                        <option dir="ltr">15</option>
+                                        <option dir="ltr">16</option>
+                                        <option dir="ltr">17</option>
+                                        <option dir="ltr">18</option>
+                                        <option dir="ltr">19</option>
+                                        <option dir="ltr">20</option>
+                                        <option dir="ltr">21</option>
+                                        <option dir="ltr">22</option>
+                                        <option dir="ltr">23</option>
+                                      </select><select name="minutes" value="7" size="1" maxlength="3"
+                                    style="border:8px inset #C0C0C0; text-align: center; font-size: 45;  color:#00FF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1" type="text">
+                                    <option dir="ltr">00</option>
+                                    <option dir="ltr">01</option>
+                                    <option dir="ltr">02</option>
+                                    <option dir="ltr">03</option>
+                                    <option dir="ltr">04</option>
+                                    <option dir="ltr">05</option>
+                                    <option dir="ltr">06</option>
+                                    <option dir="ltr">07</option>
+                                    <option dir="ltr">08</option>
+                                    <option dir="ltr">09</option>
+                                    <option dir="ltr">10</option>
+                                    <option dir="ltr">11</option>
+                                    <option dir="ltr">12</option>
+                                    <option dir="ltr">13</option>
+                                    <option dir="ltr">14</option>
+                                    <option dir="ltr">15</option>
+                                    <option dir="ltr">16</option>
+                                    <option dir="ltr">17</option>
+                                    <option dir="ltr">18</option>
+                                    <option dir="ltr">19</option>
+                                    <option dir="ltr">20</option>
+                                    <option dir="ltr">21</option>
+                                    <option dir="ltr">22</option>
+                                    <option dir="ltr">23</option>
+                                    <option dir="ltr">24</option>
+                                    <option dir="ltr">25</option>
+                                    <option dir="ltr">26</option>
+                                    <option dir="ltr">27</option>
+                                    <option dir="ltr">28</option>
+                                    <option dir="ltr">29</option>
+                                    <option dir="ltr">30</option>
+                                    <option dir="ltr">31</option>
+                                    <option dir="ltr">32</option>
+                                    <option dir="ltr">33</option>
+                                    <option dir="ltr">34</option>
+                                    <option dir="ltr">35</option>
+                                    <option dir="ltr">36</option>
+                                    <option dir="ltr">37</option>
+                                    <option dir="ltr">38</option>
+                                    <option dir="ltr">39</option>
+                                    <option dir="ltr">40</option>
+                                    <option dir="ltr">41</option>
+                                    <option dir="ltr">42</option>
+                                    <option dir="ltr">43</option>
+                                    <option dir="ltr">44</option>
+                                    <option dir="ltr">45</option>
+                                    <option dir="ltr">46</option>
+                                    <option dir="ltr">47</option>
+                                    <option dir="ltr">48</option>
+                                    <option dir="ltr">49</option>
+                                    <option dir="ltr">50</option>
+                                    <option dir="ltr">51</option>
+                                    <option dir="ltr">52</option>
+                                    <option dir="ltr">53</option>
+                                    <option dir="ltr">54</option>
+                                    <option dir="ltr">55</option>
+                                    <option dir="ltr">56</option>
+                                    <option dir="ltr">57</option>
+                                    <option dir="ltr">58</option>
+                                    <option dir="ltr">59</option>
+
+
+
+                                  </select><select name="seconds" value="7" size="1" maxlength="3"
+                                style="border:8px inset #C0C0C0; text-align: center; font-size: 45;  color:#00FF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1" type="text">
+                                <option dir="ltr">00</option>
+                                <option dir="ltr">01</option>
+                                <option dir="ltr">02</option>
+                                <option dir="ltr">03</option>
+                                <option dir="ltr">04</option>
+                                <option dir="ltr">05</option>
+                                <option dir="ltr">06</option>
+                                <option dir="ltr">07</option>
+                                <option dir="ltr">08</option>
+                                <option dir="ltr">09</option>
+                                <option dir="ltr">10</option>
+                                <option dir="ltr">11</option>
+                                <option dir="ltr">12</option>
+                                <option dir="ltr">13</option>
+                                <option dir="ltr">14</option>
+                                <option dir="ltr">15</option>
+                                <option dir="ltr">16</option>
+                                <option dir="ltr">17</option>
+                                <option dir="ltr">18</option>
+                                <option dir="ltr">19</option>
+                                <option dir="ltr">20</option>
+                                <option dir="ltr">21</option>
+                                <option dir="ltr">22</option>
+                                <option dir="ltr">23</option>
+                                <option dir="ltr">24</option>
+                                <option dir="ltr">25</option>
+                                <option dir="ltr">26</option>
+                                <option dir="ltr">27</option>
+                                <option dir="ltr">28</option>
+                                <option dir="ltr">29</option>
+                                <option dir="ltr">30</option>
+                                <option dir="ltr">31</option>
+                                <option dir="ltr">32</option>
+                                <option dir="ltr">33</option>
+                                <option dir="ltr">34</option>
+                                <option dir="ltr">35</option>
+                                <option dir="ltr">36</option>
+                                <option dir="ltr">37</option>
+                                <option dir="ltr">38</option>
+                                <option dir="ltr">39</option>
+                                <option dir="ltr">40</option>
+                                <option dir="ltr">41</option>
+                                <option dir="ltr">42</option>
+                                <option dir="ltr">43</option>
+                                <option dir="ltr">44</option>
+                                <option dir="ltr">45</option>
+                                <option dir="ltr">46</option>
+                                <option dir="ltr">47</option>
+                                <option dir="ltr">48</option>
+                                <option dir="ltr">49</option>
+                                <option dir="ltr">50</option>
+                                <option dir="ltr">51</option>
+                                <option dir="ltr">52</option>
+                                <option dir="ltr">53</option>
+                                <option dir="ltr">54</option>
+                                <option dir="ltr">55</option>
+                                <option dir="ltr">56</option>
+                                <option dir="ltr">57</option>
+                                <option dir="ltr">58</option>
+                                <option dir="ltr">59</option>
+
+
+
+                              </select></font><font style="font-weight: 700;"
+                          color="#FFFFFF" face="Verdana" size="2"> </font></td>
+                      <td width="163" height="68" align="center" valign="bottom" style="border: 10px ridge #FFFFFF" bgcolor="#FFFFFF" dir="ltr" background="bgbright.jpg">
+
+
+
+
+                        <p style="margin-left:5; margin-right:5; margin-top:0; margin-bottom:5" dir="ltr">
+                          <b><font face="Tahoma" size="6">ZONA</font></b><p style="margin:0 5; " dir="ltr"><font style="font-weight: 700;" color="#FFFFFF" face="Verdana"
+                            size="-1">
+                            <select name="timezone" value="7" size="1" maxlength="3"
+                            style="border:8px inset #C0C0C0; text-align: center; font-size: 45; color:#FFFF00; background-image:url('bgmaindark.jpg'); padding-left:4; padding-right:4; padding-top:1; padding-bottom:1; font-weight:bold" type="text">
+                            <option dir="ltr">+12</option>
+                            <option dir="ltr">+11</option>
+                            <option dir="ltr">+10</option>
+                            <option dir="ltr">+9</option>
+                            <option dir="ltr">+8</option>
+                            <option dir="ltr">+7</option>
+                            <option dir="ltr">+6</option>
+                            <option dir="ltr">+5</option>
+                            <option dir="ltr">+4</option>
+                            <option dir="ltr">+3</option>
+                            <option dir="ltr">+2</option>
+                            <option dir="ltr">+1</option>
+                            <option dir="ltr">0</option>
+                            <option dir="ltr">-1</option>
+                            <option dir="ltr">-2</option>
+                            <option dir="ltr">-3</option>
+                            <option dir="ltr">-4</option>
+                            <option dir="ltr">-5</option>
+                            <option dir="ltr">-6</option>
+                            <option dir="ltr">-7</option>
+                            <option dir="ltr">-8</option>
+                            <option dir="ltr">-9</option>
+                            <option dir="ltr">-10</option>
+                            <option dir="ltr">-11</option>
+                            <option dir="ltr">-12</option>
+                            <option selected dir="ltr">&nbsp;</option>
+
+                          </select>
+                      </font>
+                  </td>
+                <td width="10" height="68" align="center" valign="bottom" dir="ltr">
+                  &nbsp;</td>
+              </tr>
+          </table>
+      </td>
+
+  </tr>
+
+
+
+
+
+</tbody>
+</table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="1030" id="AutoNumber7" height="1" dir="ltr">
+  <tr>
+
+
+
+
+    <td width="1000" height="7" dir="ltr" align="center" colspan="4">
+      <p style="margin-top: -10; margin-bottom: 0">
+      </td>
+  </tr>
+<tr>
+  <td width="250" height="1" dir="ltr" align="center">
+    <font size="5" color="#FFFFFF">Jam Sekarang</font></td>
+  <td width="250" height="1" dir="ltr" align="center">
+    <font size="5" color="#FFFFFF">Tinggi Matahari</font></td>
+  <td width="250" height="1" dir="ltr" align="center">
+    <font size="5" color="#FFFFFF">Terbit</font></td>
+  <td width="250" height="1" dir="ltr" align="center">
+    <font size="5" color="#FFFFFF">Terbenam</font></td>
+</tr>
+<tr>
+  <td width="250" height="1" dir="ltr">
+
+
+
+
+
+    <p align="center" style="margin-top: 5" dir="ltr">
+      <b>
+
+        <div id="jam" style="" dir="ltr">
+
+
+        </div>
+    </b>
+
+
+
+
+
+
+
+
+
+
+
+
+</span>
+</td>
+<td width="250" height="1" dir="ltr">
+  <p style="margin-top: 0; margin-bottom: 0" align="center" dir="ltr">
+    <font face="Tahoma">
+      <input size="5" name="za" style="border:1px solid #000000; text-align:
+      center; color: #00CCFF; font-size:40; background-image:url('bgmaindark.jpg')"></font></td>
+  <td width="250" height="1" dir="ltr">
+    <p align="center" style="margin-top:0; margin-bottom:0; " dir="ltr">
+      <font face="Tahoma" size="-1">
+
+
+
+
+
+
+        &nbsp;</font><font face="Tahoma"><input size="5" name="sunrise" style="border:1px solid #000000; text-align:
+        center; color: #00FF00; font-size:40; background-image:url('bgmaindark.jpg')"></font></td>
+    <td width="250" height="1" dir="ltr">
+      <p align="center" dir="ltr">
+        <font face="Tahoma">
+          <input size="5" name="sunset" style="border:1px solid #000000; text-align:
+          center; color: #00FF00; font-size:40; background-image:url('bgmaindark.jpg')"></font></td>
+    </tr>
+  <tr>
+    <td width="250" height="1" dir="ltr">
+      <p style="margin-top: 5; margin-bottom: 5">
+      </td>
+    <td width="250" height="1" dir="ltr">
+      <p style="margin-top: 5; margin-bottom: 5">
+      </td>
+    <td width="250" height="1" dir="ltr">
+      <p style="margin-top: 5; margin-bottom: 5">
+      </td>
+    <td width="250" height="1" dir="ltr">
+      <p style="margin-top: 5; margin-bottom: 5">
+      </td>
+  </tr>
+<tr>
+  <td width="25%" height="121" align="center" dir="ltr" background="green.gif">
+
+
+    <p align="center" style="margin-top: 20; margin-bottom: 20" dir="ltr">
+
+
+
+
+
+
+      <font face="Tahoma" size="-1">
+
+
+
+
+
+
+        <input onclick="myTimer = setInterval(startTime, 500)"
+        class="btn3" type="button" value="Track"></font></td>
+    <td width="25%" height="121" align="center" dir="ltr" background="red.gif">
+
+
+      <p style="margin-top: 20; margin-bottom: 20" dir="ltr">
+
+
+
+
+
+
+        <font face="Tahoma" size="-1">
+
+
+
+
+
+
+          <input onclick="clearInterval(myTimer)" class="btn3" type="button" value="Stop">
+        </font>
+    </td>
+  <td width="25%" height="121" align="center" dir="ltr" background="yellow.gif">
+    <p style="margin-top: 20; margin-bottom: 20" dir="ltr">
+
+
+
+
+      <font face="Tahoma" size="-1">
+        <input onclick="Calculate2()"  class="btn3" type="button" value="North">
+      </font>
+  </td>
+<td width="25%" height="121" align="center" dir="ltr" background="blue.gif">
+  <p align="center" style="margin-top: 20; margin-bottom: 20" dir="ltr">
+
+
+
+
+    <font face="Tahoma" size="-1">
+      <input onclick="Calculate();"  class="btn3" type="button" value="Calc">&#39;</font></td>
+</tr>
+</table>
+
+
+</center>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="1030" id="AutoNumber11" height="37" dir="ltr">
+  <tr>
+
+
+
+    <td width="1030" height="1" dir="ltr" background="bgmaindark.jpg">
+      <p style="margin-top: 10; margin-bottom: 15" align="center" dir="ltr">
+        <font size="6" color="#C0C0C0">Q</font></span><font color="#C0C0C0"><span style="font-size: 24pt">iblat
+          Tracker Mobile v1.0 ©2025</span></font></td>
+  </tr>
+</table>
+</tbody>
+</table>
+</center>
+
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+</div>
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<p style="margin-top: 0; margin-bottom: 0" dir="ltr" align="center">
+
+
+  <input type="hidden" size="6" name="azkiblat" style="text-align: center;
+  color: #FFFFFF; font-size:30; padding-left:1; padding-right:4; padding-top:1; padding-bottom:1; background-image:url('bgmaindark.jpg')" value="0">
+</td>&nbsp;</tr></center></div></form>    </td>
+</tr>
+</table>
+</div>
+
+<p>&nbsp;</p>
+</body>
+</html>
