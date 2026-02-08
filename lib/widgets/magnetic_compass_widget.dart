@@ -160,126 +160,125 @@ class _MagneticCompassWidgetState extends State<MagneticCompassWidget> {
       return _buildErrorWidget();
     }
 
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Compass widget
-          SizedBox(
-            width: 300,
-            height: 300,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Rotating compass bezel (berputar sehingga N selalu ke utara)
-                Transform.rotate(
-                  angle: (_heading * (math.pi / 180) * -1),
-                  child: Container(
-                    width: 280,
-                    height: 280,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black.withOpacity(0.7),
-                      border: Border.all(color: Colors.red.shade700, width: 3),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.red.withOpacity(0.3),
-                          blurRadius: 20,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: CustomPaint(
-                      size: const Size(280, 280),
-                      painter: CompassBackgroundPainter(),
-                    ),
-                  ),
-                ),
-
-                // Fixed phone direction indicator (segitiga putih tetap di atas)
-                Positioned(
-                  top: 10,
-                  child: CustomPaint(
-                    size: const Size(30, 30),
-                    painter: PhoneDirectionIndicator(),
-                  ),
-                ),
-
-                // Center point
-                Container(
-                  width: 16,
-                  height: 16,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Compass widget - UKURAN DIPERKECIL
+        SizedBox(
+          width: 220, // Dikurangi dari 300
+          height: 220, // Dikurangi dari 300
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Rotating compass bezel (berputar sehingga N selalu ke utara)
+              Transform.rotate(
+                angle: (_heading * (math.pi / 180) * -1),
+                child: Container(
+                  width: 200, // Dikurangi dari 280
+                  height: 200, // Dikurangi dari 280
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
-                    border: Border.all(color: Colors.red, width: 2),
+                    color: Colors.black.withOpacity(0.7),
+                    border: Border.all(color: Colors.red.shade700, width: 2.5),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 4,
+                        color: Colors.red.withOpacity(0.3),
+                        blurRadius: 15,
+                        spreadRadius: 3,
                       ),
                     ],
                   ),
-                ),
-
-                // Label "Kompas Magnetik" (tidak berputar)
-                const Positioned(
-                  bottom: 20,
-                  child: Text(
-                    'KOMPAS MAGNETIK',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2,
-                    ),
+                  child: CustomPaint(
+                    size: const Size(200, 200), // Dikurangi dari 280
+                    painter: CompassBackgroundPainter(),
                   ),
                 ),
-              ],
-            ),
+              ),
+
+              // Fixed phone direction indicator (segitiga putih tetap di atas)
+              Positioned(
+                top: 5,
+                child: CustomPaint(
+                  size: const Size(25, 25), // Dikurangi dari 30
+                  painter: PhoneDirectionIndicator(),
+                ),
+              ),
+
+              // Center point
+              Container(
+                width: 12, // Dikurangi dari 16
+                height: 12, // Dikurangi dari 16
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  border: Border.all(color: Colors.red, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 4,
+                    ),
+                  ],
+                ),
+              ),
+
+              // Label "Kompas Magnetik" (tidak berputar)
+              const Positioned(
+                bottom: 12,
+                child: Text(
+                  'KOMPAS MAGNETIK',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 9, // Dikurangi dari 11
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+            ],
           ),
+        ),
 
-          // Heading display DI BAWAH kompas
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.red.shade700, width: 2),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Direction text
-                SizedBox(
-                  width: 30,
-                  child: Text(
-                    _getDirectionText(_heading),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                // Degree display
-                Text(
-                  '${_heading.toInt()}°',
+        // JARAK ANTARA KOMPAS DAN HEADING DISPLAY
+        const SizedBox(height: 180), // Jarak lebih jauh agar heading di bawah
+        // Heading display DI PALING BAWAH
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.red.shade700, width: 2),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Direction text
+              SizedBox(
+                width: 25,
+                child: Text(
+                  _getDirectionText(_heading),
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 32,
+                    fontSize: 16, // Dikurangi dari 20
                     fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 10),
+              // Degree display
+              Text(
+                '${_heading.toInt()}°',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 26, // Dikurangi dari 32
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -349,14 +348,15 @@ class CompassBackgroundPainter extends CustomPainter {
 
     for (var dir in directions) {
       final angle = (dir['angle'] as double) * (math.pi / 180);
-      final x = center.dx + (radius - 45) * math.sin(angle);
-      final y = center.dy - (radius - 45) * math.cos(angle);
+      final x =
+          center.dx + (radius - 32) * math.sin(angle); // Dikurangi dari 45
+      final y = center.dy - (radius - 32) * math.cos(angle);
 
       textPainter.text = TextSpan(
         text: dir['text'] as String,
         style: TextStyle(
           color: dir['color'] as Color,
-          fontSize: dir['text'] == 'U' ? 24 : 20,
+          fontSize: dir['text'] == 'U' ? 18 : 16, // Dikurangi dari 24 dan 20
           fontWeight: FontWeight.bold,
           shadows: [
             Shadow(color: Colors.black.withOpacity(0.7), blurRadius: 4),
@@ -374,15 +374,16 @@ class CompassBackgroundPainter extends CustomPainter {
     // Draw degree numbers (0, 30, 60, 90, ...)
     final degreeStyle = TextStyle(
       color: Colors.white70,
-      fontSize: 14,
+      fontSize: 11, // Dikurangi dari 14
       fontWeight: FontWeight.w500,
       shadows: [Shadow(color: Colors.black.withOpacity(0.7), blurRadius: 2)],
     );
 
     for (int deg = 0; deg < 360; deg += 30) {
       final angle = deg * (math.pi / 180);
-      final x = center.dx + (radius - 70) * math.sin(angle);
-      final y = center.dy - (radius - 70) * math.cos(angle);
+      final x =
+          center.dx + (radius - 50) * math.sin(angle); // Dikurangi dari 70
+      final y = center.dy - (radius - 50) * math.cos(angle);
 
       textPainter.text = TextSpan(text: '$deg', style: degreeStyle);
 
@@ -396,19 +397,21 @@ class CompassBackgroundPainter extends CustomPainter {
     // Draw degree marks
     final minorPaint = Paint()
       ..color = Colors.white30
-      ..strokeWidth = 1.5;
+      ..strokeWidth = 1.2; // Dikurangi dari 1.5
 
     final majorPaint = Paint()
       ..color = Colors.white60
-      ..strokeWidth = 2;
+      ..strokeWidth = 1.5; // Dikurangi dari 2
 
     for (int i = 0; i < 360; i += 2) {
       final angle = i * (math.pi / 180);
       final isMajor = i % 30 == 0;
       final currentPaint = isMajor ? majorPaint : minorPaint;
 
-      final startRadius = isMajor ? radius - 25 : radius - 15;
-      final endRadius = radius - 10;
+      final startRadius = isMajor
+          ? radius - 18
+          : radius - 11; // Dikurangi dari 25 dan 15
+      final endRadius = radius - 7; // Dikurangi dari 10
 
       final start = Offset(
         center.dx + startRadius * math.sin(angle),
@@ -429,8 +432,16 @@ class CompassBackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    canvas.drawCircle(center, radius - 80, innerCirclePaint);
-    canvas.drawCircle(center, radius - 90, innerCirclePaint);
+    canvas.drawCircle(
+      center,
+      radius - 57,
+      innerCirclePaint,
+    ); // Dikurangi dari 80
+    canvas.drawCircle(
+      center,
+      radius - 64,
+      innerCirclePaint,
+    ); // Dikurangi dari 90
   }
 
   @override
@@ -446,8 +457,8 @@ class PhoneDirectionIndicator extends CustomPainter {
     // Draw white triangle pointing up
     final path = Path()
       ..moveTo(center.dx, 0)
-      ..lineTo(center.dx - 10, 20)
-      ..lineTo(center.dx + 10, 20)
+      ..lineTo(center.dx - 8, 16) // Dikurangi dari 10 dan 20
+      ..lineTo(center.dx + 8, 16)
       ..close();
 
     // Draw shadow

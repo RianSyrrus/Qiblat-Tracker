@@ -260,13 +260,17 @@ class _QtPageState extends State<QtPage> {
           // WebView - Kompas Matahari
           SafeArea(child: WebViewWidget(controller: _controller)),
 
-          // Kompas Magnetik Overlay (di tengah bawah)
+          // Kompas Magnetik Overlay (di tengah, sedikit ke atas dari center)
           if (_isCompassVisible)
             Positioned(
-              bottom: 80,
+              top: 0,
               left: 0,
               right: 0,
-              child: const MagneticCompassWidget(),
+              bottom: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 100), // Naikkan kompas
+                child: const Center(child: MagneticCompassWidget()),
+              ),
             ),
 
           // Tombol Drawer di kiri bawah
