@@ -11,6 +11,11 @@ dependencies:
     sdk: flutter
   webview_flutter: ^4.0.7
   geolocator: ^9.0.2
+  geolocator_android: ^4.6.2
+  sensors_plus: ^3.0.0
+  pdf: ^3.10.4
+  printing: ^5.11.0
+  path_provider: ^2.1.0
 
 dev_dependencies:
   flutter_test:
